@@ -92,6 +92,7 @@
             overflow-x: hidden;            /* Empêche le scroll horizontal */
             min-height: 100vh;             /* Hauteur minimale de la fenêtre */
             position: relative;            /* Permet le positionnement des pseudo-éléments */
+            padding-top: 5rem;             /* Évite que le menu fixe ne recouvre le contenu */
         }
 
         /* ===== GRILLE DE FOND ANIMÉE ===== */
@@ -185,123 +186,164 @@
         }
 
         /* ===== BARRE DE NAVIGATION ===== */
-        /* Menu de navigation en haut de la page avec effet de verre dépoli */
+        /* Menu de navigation en haut de la page avec drawer discret */
         nav {
-            position: relative;            /* Position normale dans le flux */
+            position: fixed;
             top: 0;
-            width: 100%;                   /* Occupe toute la largeur */
-            background: rgba(10, 10, 10, 0.6);  /* Fond noir semi-transparent */
-            backdrop-filter: blur(20px);   /* Effet de flou d'arrière-plan (verre dépoli) */
-            padding: 0.8rem 1.5rem;        /* Espacement interne réduit */
-            z-index: 1000;                 /* Au-dessus de tout le contenu */
-            border-bottom: 1px solid rgba(139, 92, 246, 0.3);  /* Bordure violette subtile */
-            animation: slideDown 0.5s ease;  /* Animation de descente au chargement */
-            display: flex;                 /* Flexbox pour l'alignement */
-            align-items: center;           /* Centre verticalement */
-            justify-content: space-between;  /* Espace entre logo et menu */
-            gap: 1.5rem;                   /* Espacement entre éléments réduit */
+            left: 0;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.85rem 1.2rem;
+            gap: 1rem;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.78);
+            backdrop-filter: blur(22px);
+            border-bottom: 1px solid rgba(139, 92, 246, 0.18);
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.25);
         }
 
-        /* ===== LOGO DE NAVIGATION ===== */
-        /* Logo affiché dans le coin gauche du menu */
+        .nav-logo-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            z-index: 1001;
+        }
+
         .nav-logo {
-            height: 40px;                  /* Hauteur fixe du logo réduite */
-            width: auto;                   /* Largeur proportionnelle */
-            z-index: 1001;                 /* Au-dessus du menu hamburger */
+            height: 36px;
+            width: auto;
+        }
+
+        .nav-toggle {
+            width: 46px;
+            height: 46px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.04);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            padding: 0.6rem;
+            transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+            z-index: 1002;
+        }
+
+        .nav-toggle:hover {
+            background: rgba(139, 92, 246, 0.14);
+            transform: translateY(-1px);
+            border-color: rgba(139, 92, 246, 0.32);
+        }
+
+        .nav-toggle span {
+            width: 22px;
+            height: 2px;
+            border-radius: 999px;
+            background: var(--text-primary);
+            transition: transform 0.25s ease, opacity 0.25s ease;
             display: block;
         }
 
-        /* ===== MENU HAMBURGER (MOBILE) ===== */
-        /* Bouton menu à 3 barres pour mobile, caché sur desktop */
-        .hamburger {
-            display: none;                 /* Caché par défaut (visible seulement sur mobile) */
-            flex-direction: column;        /* Barres empilées verticalement */
-            cursor: pointer;               /* Curseur cliquable */
-            z-index: 1001;                 /* Au-dessus du menu */
-            gap: 5px;                      /* Espacement entre les barres */
+        .nav-toggle.active span:nth-child(1) {
+            transform: translateY(6px) rotate(45deg);
         }
 
-        /* Chaque barre du menu hamburger */
-        .hamburger span {
-            width: 28px;                   /* Largeur des barres */
-            height: 3px;                   /* Épaisseur des barres */
-            background: var(--primary-purple);  /* Couleur violette */
-            border-radius: 3px;            /* Bords arrondis */
-            transition: all 0.3s ease;     /* Animation fluide lors du changement */
+        .nav-toggle.active span:nth-child(2) {
+            opacity: 0;
         }
 
-        /* ===== ANIMATION MENU HAMBURGER ACTIF ===== */
-        /* Transformation des 3 barres en croix (X) lorsque le menu est ouvert */
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(8px, 8px);  /* Barre du haut: rotation et déplacement */
+        .nav-toggle.active span:nth-child(3) {
+            transform: translateY(-6px) rotate(-45deg);
         }
 
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;                    /* Barre du milieu: disparait */
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            right: -320px;
+            width: 300px;
+            height: 100vh;
+            padding: 3rem 1.5rem;
+            background: rgba(14, 14, 14, 0.98);
+            backdrop-filter: blur(20px);
+            box-shadow: -22px 0 70px rgba(0, 0, 0, 0.35);
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            transition: right 0.35s ease;
+            z-index: 1000;
+            overflow-y: auto;
         }
 
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(8px, -8px);  /* Barre du bas: rotation inverse */
+        .nav-menu.active {
+            right: 0;
+        }
+
+        .nav-menu li {
+            list-style: none;
+        }
+
+        .nav-menu a {
+            display: block;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.98rem;
+            font-weight: 600;
+            padding: 0.95rem 1rem;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.03);
+            transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a:focus {
+            color: var(--text-primary);
+            background: rgba(139, 92, 246, 0.16);
+            transform: translateX(4px);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            margin-top: 0.45rem;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--primary-purple), var(--accent-cyan));
+            transition: width 0.25s ease;
+        }
+
+        .nav-menu a:hover::after,
+        .nav-menu a:focus::after {
+            width: 60%;
+        }
+
+        .nav-cv {
+            background: rgba(6, 182, 212, 0.14);
+            color: var(--accent-cyan) !important;
+            border: 1px solid rgba(6, 182, 212, 0.2);
+            padding: 0.85rem 1rem;
+            border-radius: 999px;
+            box-shadow: inset 0 0 0 1px rgba(6, 182, 212, 0.08);
+        }
+
+        .nav-cv:hover {
+            background: rgba(6, 182, 212, 0.26);
+            transform: translateX(3px);
         }
 
         /* Animation de descente du menu au chargement de la page */
         @keyframes slideDown {
             from {
-                transform: translateY(-100%);  /* Départ: menu en dehors de l'écran (haut) */
-                opacity: 0;                     /* Invisible */
+                transform: translateY(-100%);
+                opacity: 0;
             }
             to {
-                transform: translateY(0);       /* Arrivée: position normale */
-                opacity: 1;                     /* Visible */
+                transform: translateY(0);
+                opacity: 1;
             }
-        }
-
-        /* ===== LISTE DE NAVIGATION ===== */
-        /* Liste des liens du menu */
-        nav ul {
-            list-style: none;              /* Retire les puces de liste */
-            display: flex;                 /* Disposition horizontale */
-            justify-content: flex-start;   /* Aligné à gauche */
-            gap: 1rem;                     /* Espacement entre les liens réduit */
-            margin: 0;
-            flex: 1;                       /* Prend l'espace disponible */
-        }
-
-        /* ===== LIENS DE NAVIGATION ===== */
-        /* Styles des liens dans le menu (exclut le lien du logo) */
-        nav ul a {
-            color: var(--text-secondary);  /* Gris par défaut */
-            text-decoration: none;         /* Pas de soulignement */
-            font-weight: 500;              /* Texte semi-gras */
-            transition: all 0.3s ease;     /* Transition fluide au survol */
-            padding: 0.3rem 0.7rem;        /* Espacement interne réduit */
-            border-radius: 8px;            /* Coins arrondis */
-            position: relative;            /* Pour le pseudo-élément ::after */
-        }
-
-        /* Ligne de soulignement animée sous les liens */
-        nav ul a::after {
-            content: '';                   /* Pseudo-élément vide */
-            position: absolute;
-            bottom: 0;                     /* Positionné en bas du lien */
-            left: 50%;                     /* Centré horizontalement */
-            width: 0;                      /* Largeur nulle au départ */
-            height: 2px;                   /* Épaisseur de la ligne */
-            background: var(--primary-purple);  /* Couleur violette */
-            transition: all 0.3s ease;     /* Animation fluide */
-            transform: translateX(-50%);   /* Centre la ligne */
-        }
-
-        /* ===== EFFET HOVER SUR LES LIENS ===== */
-        /* Changements visuels au survol des liens */
-        nav ul a:hover {
-            color: var(--primary-purple);  /* Texte devient violet */
-            background: rgba(139, 92, 246, 0.1);  /* Fond violet léger */
-        }
-
-        /* Élargissement de la ligne au survol */
-        nav ul a:hover::after {
-            width: 80%;                    /* La ligne s'élargit à 80% */
         }
 
         /* ===== SECTION HÉRO (ACCUEIL) ===== */
@@ -1389,62 +1431,34 @@
 
         /* Smartphones et tablettes en portrait */
         @media (max-width: 768px) {
-            .hamburger {
-                display: flex;
-            }
-
             nav {
-                position: fixed;
-                justify-content: flex-end;
-                padding: 1rem;
-                background: transparent;
-                backdrop-filter: none;
-                border-bottom: none;
+                padding: 0.8rem 1rem;
             }
 
-            /* Cache le logo sur mobile */
             .nav-logo {
-                display: none;
+                height: 32px;
             }
 
-            nav ul {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 70%;
-                height: 100vh;
-                background: rgba(10, 10, 10, 0.98);
-                backdrop-filter: blur(20px);
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                gap: 2rem;
-                transition: right 0.4s ease;
-                border-left: 1px solid rgba(139, 92, 246, 0.2);
-                padding: 2rem;
+            .nav-menu {
+                width: 85vw;
+                max-width: 320px;
+                padding: 2.5rem 1.25rem;
             }
 
-            nav ul.active {
-                right: 0;
+            .nav-toggle {
+                width: 44px;
+                height: 44px;
             }
 
-            nav ul li {
-                width: 100%;
-                text-align: center;
-            }
-
-            nav ul a {
-                display: block;
-                width: 100%;
-                padding: 1rem;
-                font-size: 1.1rem;
+            .nav-menu a {
+                font-size: 1rem;
+                padding: 0.95rem 1rem;
             }
 
             .hero-content {
                 grid-template-columns: 1fr;
                 text-align: center;
                 gap: 2rem;
-                /* Invert order on mobile: image first, text second */
                 display: flex;
                 flex-direction: column-reverse;
             }
@@ -1736,34 +1750,36 @@
     <!-- Menu principal avec logo et liens vers les différentes sections -->
     <!-- =================================================================== -->
     <nav>
-        <!-- Lien vers l'accueil via le logo -->
-        <a href="#home">
+        <a href="#home" class="nav-logo-link">
             <img src="images/logo.png" alt="Logo Wajdi Ben Ouirane" class="nav-logo">
         </a>
 
-        <!-- Menu hamburger (visible uniquement sur mobile) -->
-        <div class="hamburger" id="hamburger">
-            <span></span>  <!-- Barre 1 du menu hamburger -->
-            <span></span>  <!-- Barre 2 du menu hamburger -->
-            <span></span>  <!-- Barre 3 du menu hamburger -->
-        </div>
-
-        <!-- Liste des liens de navigation -->
-        <ul id="navMenu">
+        <ul id="navMenu" class="nav-menu">
             <li><a href="#home">Accueil</a></li>
+            <li><a href="#bilan">Bilan</a></li>
+            <li><a href="#auto-eval">Auto-éval</a></li>
             <li><a href="#skills">Compétences</a></li>
+            <li><a href="#qualites">Qualités</a></li>
             <li><a href="#distinctions">Distinctions</a></li>
+            <li><a href="#projets-personnels">Projets</a></li>
             <li><a href="#formation">Formation</a></li>
-            <li><a href="#professional-projects">Projets Pro</a></li>
             <li><a href="#experience">Expérience</a></li>
-            <li><a href="#certifications">Certifications</a></li>
+            <li><a href="#decouverte-pro">Découverte</a></li>
+            <li><a href="#passeport-culturel">Passeport</a></li>
+            <li><a href="#objectifs">Objectifs</a></li>
+            <li><a href="#engagement">Engagement</a></li>
             <li><a href="#passions">Passions</a></li>
             <li><a href="#langues">Langues</a></li>
+            <li><a href="#certifications">Certifs</a></li>
             <li><a href="#contact">Contact</a></li>
-            <!-- Lien de téléchargement du CV avec couleur cyan distinctive -->
-            <li><a href="resume/CV_Wajdi_Ben_Ouirane_D.pdf" download style="color: var(--accent-cyan);"><i
-                        class="fas fa-download"></i> CV</a></li>
+            <li><a href="resume/CV_Wajdi_Ben_Ouirane_D.pdf" download class="nav-cv"><i class="fas fa-download"></i> CV</a></li>
         </ul>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </nav>
 
     <!-- =================================================================== -->
@@ -1793,34 +1809,76 @@
         </div>
     </section>
 
-    <!-- =================================================================== -->
-    <!-- SECTION ACTIVITÉS ET DISTINCTIONS -->
-    <!-- Participation au Trophée EX MACHINA et compétitions de cybersécurité -->
-    <!-- =================================================================== -->
-   <section id="distinctions">
-    <h2>Activités et Distinctions</h2>
+
+
+<section id="bilan">
+    <h2>Bilan BUT3</h2>
     <div class="timeline-item">
-        <h3>
-            <img src="images/nuit.jpg" alt="Logo Nuit de l'Info" class="logo">
-            NUIT DE L'INFO
-        </h3>
-        <span class="date">Édition 2025 - 2026</span>
-        <p class="location">Université Sorbonne Paris Nord</p>
-        <p>Participation à cette compétition nationale de développement consistant à concevoir et implémenter une application web complète en une seule nuit, en répondant à des défis spécifiques ("Défis Partenaires").</p>
+        <h3><i class="fas fa-chart-line"></i> Synthèse S5 / S6</h3>
+        <span class="date">Semestres 5 et 6</span>
+        <p>Durant le BUT3, j'ai construit un parcours orienté projets concrets : développement d'applications, implémentation de solutions IA et participation à des défis collaboratifs de cybersécurité.</p>
         <ul>
-            <li><strong>Développement Full-Stack :</strong> Conception rapide d'une interface utilisateur et d'un backend fonctionnel.</li>
-            <li><strong>Intégration de l'IA :</strong> Mise en œuvre de solutions basées sur les données pour répondre aux problématiques du sujet.</li>
-            <li><strong>Gestion de projet agile :</strong> Collaboration intense en équipe et respect de deadlines extrêmement serrées (15h de code non-stop).</li>
+            <li><strong>SAE S5 :</strong> Conception et développement d'une solution Full-Stack pour le projet Miaam avec collecte de données, pipeline ETL et modèle de recommandation.</li>
+            <li><strong>SAE S6 :</strong> Participation au développement d'un prototype rapide en équipe, avec gestion du temps et intégration des besoins partenaires.</li>
+            <li>Approche expérimentale avec tests, validation des résultats et documentation des choix techniques.</li>
         </ul>
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem; align-items: center;">
-            <img src="images/nuit_info_1.jpeg" alt="Nuit de l'Info 1" onclick="openCertModal('images/nuit_info_1.jpeg')" style="width: 100%; height: 250px; object-fit: cover; object-position: center top; border-radius: 8px; cursor: pointer; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-            <img src="images/nuit_info_2.jpeg" alt="Nuit de l'Info 2" onclick="openCertModal('images/nuit_info_2.jpeg')" style="width: 100%; height: 250px; object-fit: cover; object-position: center center; border-radius: 8px; cursor: pointer; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-            <img src="images/nuit_info_3.jpeg" alt="Nuit de l'Info 3" onclick="openCertModal('images/nuit_info_3.jpeg')" style="width: 100%; height: 250px; object-fit: cover; object-position: center; border-radius: 8px; cursor: pointer; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+    </div>
+    <div class="timeline-item">
+        <h3><i class="fas fa-user-graduate"></i> Compétences acquises</h3>
+        <span class="date">Axes de progrès</span>
+        <ul>
+            <li>Maîtrise des outils de développement : Python, Java, C, C#, Git, GitHub.</li>
+            <li>Compétences métiers : architecture logicielle, sécurité des données, déploiement et automatisation.</li>
+            <li>Compétences transverses : travail en équipe, communication de projet, gestion des priorités et respect de jalons.</li>
+        </ul>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-top: 1.5rem;">
+        <figure style="margin:0;">
+            <img src="images/nuit_info_1.jpeg" alt="Capture Nuit de l'Info" style="width:100%; border-radius:8px; object-fit:cover; height:220px;">
+            <figcaption style="margin-top:0.5rem; color: var(--text-secondary); font-size:0.95rem;">Capture de la Nuit de l'Info : collaboration sur une application web en équipe.</figcaption>
+        </figure>
+        <figure style="margin:0;">
+            <img src="images/Miaam.png" alt="Capture projet Miaam" style="width:100%; border-radius:8px; object-fit:cover; height:220px;">
+            <figcaption style="margin-top:0.5rem; color: var(--text-secondary); font-size:0.95rem;">Projet Miaam : recommandation intelligente et lutte contre le gaspillage.</figcaption>
+        </figure>
+    </div>
+</section>
+
+<section id="auto-eval">
+    <h2>Auto-évaluation</h2>
+    <div class="projects-grid">
+        <div class="project-card fade-in">
+            <h3><i class="fas fa-users"></i> Travail en équipe</h3>
+            <p>Niveau : 4/5</p>
+            <ul style="text-align: left; margin: 1rem 0 0 1.5rem; color: var(--accent-cyan);">
+                <li>Coordination de la conception pendant la Nuit de l'Info.</li>
+                <li>Répartition claire des tâches et gestion des échanges avec les partenaires.</li>
+                <li>Résolution de conflits techniques et organisation de réunions de suivi.</li>
+            </ul>
+        </div>
+        <div class="project-card fade-in">
+            <h3><i class="fas fa-code"></i> Développement logiciel</h3>
+            <p>Niveau : 4/5</p>
+            <ul style="text-align: left; margin: 1rem 0 0 1.5rem; color: var(--accent-cyan);">
+                <li>Création de scripts Python, d'une application .NET et de prototypes web.</li>
+                <li>Utilisation de Git pour versionner le code et gérer les branches.</li>
+                <li>Application des bonnes pratiques de réutilisation et organisation du code.</li>
+            </ul>
+        </div>
+        <div class="project-card fade-in">
+            <h3><i class="fas fa-shield-alt"></i> Cybersécurité / IA</h3>
+            <p>Niveau : 4/5</p>
+            <ul style="text-align: left; margin: 1rem 0 0 1.5rem; color: var(--accent-cyan);">
+                <li>Implémentation de bonnes pratiques de sécurité sur des environnements Windows et Linux.</li>
+                <li>Analyse de données et mise en place d'algorithmes de recommandation.</li>
+                <li>Participation à des CTF et compétences en investigation numérique.</li>
+            </ul>
         </div>
     </div>
 </section>
 
 <section id="skills">
+        <a id="professional-projects"></a>
         <h2>Compétences</h2>
         
         <div class="projects-grid">
@@ -1927,6 +1985,53 @@
         </div>
     </section>
 
+<section id="distinctions">
+    <h2>Activités et Distinctions</h2>
+    <div class="timeline-item">
+        <h3>
+            <img src="images/nuit.jpg" alt="Logo Nuit de l'Info" class="logo">
+            NUIT DE L'INFO
+        </h3>
+        <span class="date">Édition 2025 - 2026</span>
+        <p class="location">Université Sorbonne Paris Nord</p>
+        <p>Participation à cette compétition nationale de développement consistant à concevoir et implémenter une application web complète en une seule nuit, en répondant à des défis spécifiques ("Défis Partenaires").</p>
+        <ul>
+            <li><strong>Développement Full-Stack :</strong> Conception rapide d'une interface utilisateur et d'un backend fonctionnel.</li>
+            <li><strong>Intégration de l'IA :</strong> Mise en œuvre de solutions basées sur les données pour répondre aux problématiques du sujet.</li>
+            <li><strong>Gestion de projet agile :</strong> Collaboration intense en équipe et respect de deadlines extrêmement serrées (15h de code non-stop).</li>
+        </ul>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem; align-items: center;">
+            <img src="images/nuit_info_1.jpeg" alt="Nuit de l'Info 1" onclick="openCertModal('images/nuit_info_1.jpeg')" style="width: 100%; height: 250px; object-fit: cover; object-position: center top; border-radius: 8px; cursor: pointer; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+            <img src="images/nuit_info_2.jpeg" alt="Nuit de l'Info 2" onclick="openCertModal('images/nuit_info_2.jpeg')" style="width: 100%; height: 250px; object-fit: cover; object-position: center center; border-radius: 8px; cursor: pointer; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+            <img src="images/nuit_info_3.jpeg" alt="Nuit de l'Info 3" onclick="openCertModal('images/nuit_info_3.jpeg')" style="width: 100%; height: 250px; object-fit: cover; object-position: center; border-radius: 8px; cursor: pointer; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        </div>
+    </div>
+</section>
+
+<section id="projets-personnels">
+        <h2>Projets personnels</h2>
+        <div class="projects-grid">
+            <div class="project-card fade-in">
+                <img src="images/dev.jpg" alt="Projet personnel développement" class="skill-image">
+                <h3><i class="fas fa-laptop-code"></i> Portfolio personnel</h3>
+                <p>Conception et développement de ce site pour présenter mes compétences, mon CV et mes réalisations.</p>
+                <p><strong>Points clés :</strong> responsive, accessible, navigation claire et CV disponible en PDF.</p>
+            </div>
+            <div class="project-card fade-in">
+                <img src="images/Miaam.png" alt="Projet Miaam" class="skill-image">
+                <h3><i class="fas fa-seedling"></i> Miaam - Anti-gaspillage</h3>
+                <p>Projet technique autour de la recommandation intelligente et de l'utilisation responsable des ressources.</p>
+                <p><strong>Compétences :</strong> Python, data pipelines, modélisation et présentation de prototype.</p>
+            </div>
+            <div class="project-card fade-in">
+                <img src="images/cyber.jpg" alt="Projet cybersécurité" class="skill-image">
+                <h3><i class="fas fa-shield-virus"></i> BlindWalk & cybersécurité</h3>
+                <p>Réalisation d'un jeu de sensibilisation Python et participation à des CTF pour appliquer mes connaissances de cybersécurité.</p>
+                <p><strong>Valeur ajoutée :</strong> résolution de problèmes, tests et apprentissage continu.</p>
+            </div>
+        </div>
+    </section>
+
     <!-- =================================================================== -->
     <!-- SECTION FORMATION -->
     <!-- Parcours académique: BUT, Licence et Baccalauréat -->
@@ -2020,22 +2125,92 @@
         </div>
     </section>
 
-
-
-    <!-- =================================================================== -->
-    <!-- SECTION CERTIFICATIONS -->
-    <!-- Certifications obtenues en cybersécurité (Fortinet, etc.) -->
-    <!-- =================================================================== -->
-    <section id="certifications">
-        <h2>Certifications</h2>
-        <!-- Liste de badges de certifications cliquables -->
-        <div class="certifications">
-            <div class="cert-badge" onclick="openCertModal('images/azure.png')"><i class="fas fa-certificate"></i> Microsoft Azure Fundamentals
-            </div>
-            <div class="cert-badge" onclick="openCertModal('images/ml.png')"><i class="fas fa-shield-halved"></i>IBM Explanatory Data Analytsis For Machine Learning</div>
-            <div class="cert-badge" onclick="openCertModal('images/linux.png')"><i class="fas fa-user-shield"></i> Cisco Linux Unhatched</div>
+    <section id="decouverte-pro">
+        <h2>Découverte du monde professionnel</h2>
+        <div class="timeline-item">
+            <h3><i class="fas fa-briefcase"></i> Culture d'entreprise</h3>
+            <span class="date">Immersion en entreprise</span>
+            <p>J'ai découvert la discipline nécessaire en entreprise : bien documenter, suivre des process, animer des réunions et rendre compte de l'avancement.</p>
+            <ul>
+                <li>Participation à des points quotidiens, revues de projet et présentations de résultats.</li>
+                <li>Utilisation d'outils de suivi : tickets, Teams, Git et documentation partagée.</li>
+                <li>Gestion de blocages techniques par analyse, test et validation progressive.</li>
+                <li>Travail coordonné avec des profils techniques et métiers pour satisfaire les besoins clients.</li>
+            </ul>
+        </div>
+        <div class="timeline-item">
+            <h3><i class="fas fa-comment-dots"></i> Travail collaboratif</h3>
+            <span class="date">Compétences relationnelles</span>
+            <ul>
+                <li>Communication claire des difficultés et des solutions envisagées.</li>
+                <li>Écoute active et adaptation à des demandes changeantes.</li>
+                <li>Gestion de conflits techniques par des compromis constructifs.</li>
+                <li>Priorisation des tâches en fonction du planning de l'équipe.</li>
+            </ul>
         </div>
     </section>
+
+    <section id="passeport-culturel">
+        <h2>Passeport culturel</h2>
+        <div class="projects-grid">
+            <div class="project-card fade-in">
+                <h3><i class="fas fa-globe"></i> Ouverture internationale</h3>
+                <p>Co-diplomation France-Tunisie, échanges de méthodes et travail avec des équipes multiculturelles.</p>
+                <ul style="text-align: left; margin: 1rem 0 0 1.5rem; color: var(--accent-cyan);">
+                    <li>Compréhension des différences de pratiques entre France et Tunisie.</li>
+                    <li>Adaptation à des méthodes de travail variées.</li>
+                </ul>
+            </div>
+            <div class="project-card fade-in">
+                <h3><i class="fas fa-book-open"></i> Sorties pédagogiques</h3>
+                <p>Participation à des événements, conférences et ateliers sur l'IA, le développement et la cybersécurité.</p>
+                <ul style="text-align: left; margin: 1rem 0 0 1.5rem; color: var(--accent-cyan);">
+                    <li>Veille active sur les nouveautés technologiques et les bonnes pratiques.</li>
+                    <li>Associations, hackathons et rencontres professionnelles.</li>
+                </ul>
+            </div>
+            <div class="project-card fade-in">
+                <h3><i class="fas fa-lightbulb"></i> Veille technologique</h3>
+                <p>Je me tiens informé des tendances IA, cybersécurité et développement grâce à des articles, tutoriels et conférences en ligne.</p>
+                <ul style="text-align: left; margin: 1rem 0 0 1.5rem; color: var(--accent-cyan);">
+                    <li>Suivi régulier de ressources spécialisées.</li>
+                    <li>Application de nouvelles idées dans mes projets personnels.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="objectifs">
+        <h2>Objectifs</h2>
+        <div class="timeline-item">
+            <h3><i class="fas fa-graduation-cap"></i> Poursuite d'études</h3>
+            <p>Je vais poursuivre ma formation en alternance dans une école d'ingénieur, afin d'approfondir mes compétences techniques et professionnelles tout en acquérant une expérience concrète en entreprise.</p>
+        </div>
+        <div class="timeline-item">
+            <h3><i class="fas fa-bullseye"></i> Court terme</h3>
+            <ul>
+                <li>Finaliser mon portfolio et le dossier professionnel complet pour le jury.</li>
+                <li>Renforcer mes compétences en développement web et sécurité des systèmes.</li>
+                <li>Obtenir mon BUT3 Informatique.</li>
+            </ul>
+        </div>
+        <div class="timeline-item">
+            <h3><i class="fas fa-road"></i> Moyen terme</h3>
+            <ul>
+                <li>Trouver une alternance ou un poste junior dans les domaines de la cybersécurité, de l'IA ou du développement logiciel.</li>
+                <li>Contribuer à des projets techniques structurants et polyvalents.</li>
+            </ul>
+        </div>
+        <div class="timeline-item">
+            <h3><i class="fas fa-star"></i> Long terme</h3>
+            <ul>
+                <li>Devenir chef de projet technique ou architecte sécurité.</li>
+                <li>Réussir à mener des projets qui allient innovation, performance et sécurité.</li>
+            </ul>
+        </div>
+    </section>
+
+
 
     <!-- =================================================================== -->
     <!-- MODALE DE VISUALISATION DES CERTIFICATIONS -->
@@ -2053,7 +2228,7 @@
     <!-- SECTION ENGAGEMENT & ACTIVITÉS ASSOCIATIVES -->
     <!-- Clubs et organisations: Securinets, Enactus, AIESEC -->
     <!-- =================================================================== -->
-    <section>
+    <section id="engagement">
         <h2>Activités & Engagement</h2>
         <div class="timeline-item">
             <h3>
@@ -2153,6 +2328,21 @@
     </section>
 
     <!-- =================================================================== -->
+    <!-- SECTION CERTIFICATIONS -->
+    <!-- Certifications obtenues en cybersécurité (Fortinet, etc.) -->
+    <!-- =================================================================== -->
+    <section id="certifications">
+        <h2>Certifications</h2>
+        <!-- Liste de badges de certifications cliquables -->
+        <div class="certifications">
+            <div class="cert-badge" onclick="openCertModal('images/azure.png')"><i class="fas fa-certificate"></i> Microsoft Azure Fundamentals
+            </div>
+            <div class="cert-badge" onclick="openCertModal('images/ml.png')"><i class="fas fa-shield-halved"></i>IBM Explanatory Data Analytsis For Machine Learning</div>
+            <div class="cert-badge" onclick="openCertModal('images/linux.png')"><i class="fas fa-user-shield"></i> Cisco Linux Unhatched</div>
+        </div>
+    </section>
+
+    <!-- =================================================================== -->
     <!-- SECTION CONTACT -->
     <!-- Informations de contact et formulaire de message -->
     <!-- =================================================================== -->
@@ -2238,23 +2428,23 @@
          * ===================================================================== */
         
         // Récupération des éléments du DOM
-        const hamburger = document.getElementById('hamburger');
+        const navToggle = document.getElementById('navToggle');
         const navMenu = document.getElementById('navMenu');
 
-        // Au clic sur le bouton hamburger
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');  // Active/désactive l'animation du bouton (croix)
-            navMenu.classList.toggle('active');    // Affiche/cache le menu
+        // Au clic sur le bouton de menu
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
         });
 
         /* =====================================================================
          * FERMETURE DU MENU AU CLIC SUR UN LIEN
          * Le menu se ferme automatiquement après navigation
          * ===================================================================== */
-        document.querySelectorAll('nav ul a').forEach(link => {
+        document.querySelectorAll('#navMenu a').forEach(link => {
             link.addEventListener('click', () => {
-                hamburger.classList.remove('active');  // Désactive l'animation
-                navMenu.classList.remove('active');    // Cache le menu
+                navToggle.classList.remove('active');
+                navMenu.classList.remove('active');
             });
         });
 
@@ -2263,9 +2453,8 @@
          * Le menu se ferme si l'utilisateur clique ailleurs
          * ===================================================================== */
         document.addEventListener('click', (e) => {
-            // Si le clic n'est ni sur le bouton hamburger ni sur le menu
-            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
-                hamburger.classList.remove('active');
+            if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                navToggle.classList.remove('active');
                 navMenu.classList.remove('active');
             }
         });
