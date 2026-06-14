@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -48,6 +49,7 @@
             --text-secondary: #9ca3af;    /* Texte secondaire gris */
             --accent-cyan: #06b6d4;       /* Couleur cyan d'accentuation */
         }
+        
 
         /* ===== RÉINITIALISATION DES STYLES ===== */
         /* Reset des marges et padding pour tous les éléments */
@@ -55,8 +57,6 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            /* Curseur personnalisé violet avec effet de cercles concentriques */
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="%238B5CF6" opacity="0.4"/><circle cx="16" cy="16" r="6" fill="%23A78BFA"/><circle cx="16" cy="16" r="2" fill="%23ffffff"/></svg>'), auto !important;
         }
 
         /* ===== CURSEUR PERSONNALISÉ POUR LES ÉLÉMENTS CLIQUABLES ===== */
@@ -67,13 +67,13 @@
         a *,
         button *,
         .btn * {
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="14" fill="%238B5CF6" opacity="0.6"/><circle cx="16" cy="16" r="8" fill="%23A78BFA"/><circle cx="16" cy="16" r="3" fill="%23ffffff"/></svg>'), pointer !important;
+            cursor: pointer;
         }
 
         /* Curseur avec plus d'opacité lors du clic ou focus */
         *:active,
         *:focus {
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="14" fill="%238B5CF6" opacity="0.8"/><circle cx="16" cy="16" r="8" fill="%23A78BFA"/><circle cx="16" cy="16" r="3" fill="%23ffffff"/></svg>'), pointer !important;
+            /* On peut ajouter un style de focus plus visible ici */
         }
 
         /* ===== DÉFILEMENT FLUIDE ===== */
@@ -318,6 +318,289 @@
         .nav-menu a:hover::after,
         .nav-menu a:focus::after {
             width: 60%;
+        }
+        /* =====================================================================
+   TABLEAU COMPARATIF CYBER (BILAN DE STAGE)
+   ===================================================================== */
+
+        .cyber-table-container {
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            position: relative;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* --- En-tête global --- */
+        .cyber-table-header-info {
+            padding: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: radial-gradient(circle at top left, rgba(139, 92, 246, 0.1), transparent 70%);
+            border-bottom: 1px solid rgba(139, 92, 246, 0.15);
+        }
+
+        .header-titles h3 {
+            color: var(--light-purple);
+            font-size: 1.5rem;
+            margin-bottom: 0.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .header-titles p {
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .header-date {
+            background: rgba(6, 182, 212, 0.1);
+            color: var(--accent-cyan);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            border: 1px solid rgba(6, 182, 212, 0.2);
+        }
+
+        /* --- Le Tableau (CSS Grid) --- */
+        .cyber-table {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .table-row {
+            display: grid;
+            grid-template-columns: 220px 1fr 280px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: background 0.3s ease;
+        }
+
+        .table-row:not(.table-head):hover {
+            background: rgba(139, 92, 246, 0.04);
+        }
+
+        .table-head {
+            background: rgba(139, 92, 246, 0.08);
+            font-weight: 700;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+        }
+
+        .cell {
+            padding: 1.5rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .cell-title {
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 1.1rem;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 0.75rem;
+        }
+
+        .cell-title i {
+            color: var(--accent-cyan);
+            font-size: 1.2rem;
+        }
+
+        /* --- Listes dans le tableau --- */
+        .cell-content ul, .comparison-panel ul {
+            list-style: none;
+        }
+
+        .cell-content li, .comparison-panel li {
+            margin-bottom: 0.6rem;
+            position: relative;
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .cell-content li::before, .comparison-panel li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--primary-purple);
+        }
+
+        /* --- Tags Techniques --- */
+        .cell-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            align-content: center;
+        }
+
+        .tag {
+            background: rgba(139, 92, 246, 0.1);
+            color: var(--light-purple);
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-family: 'Fira Code', monospace;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+        }
+
+        /* --- Grille Comparative (Bilan) --- */
+        .cyber-comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: rgba(255, 255, 255, 0.05);
+            gap: 1px;
+        }
+
+        .comparison-panel {
+            background: var(--bg-card);
+            padding: 2rem;
+        }
+
+        .comparison-panel h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .comparison-panel.success h4 { color: #10b981; }
+        .comparison-panel.success li::before { color: #10b981; }
+
+        .comparison-panel.warning h4 { color: #f59e0b; }
+        .comparison-panel.warning li::before { color: #f59e0b; }
+
+        /* =====================================================================
+        BILAN DE STAGE BUT3
+        ===================================================================== */
+        .stage-summary-container {
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            padding: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .stage-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.15);
+            padding-bottom: 2rem;
+        }
+
+        .stage-header h3 {
+            color: var(--light-purple);
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+
+        .stage-date {
+            color: var(--accent-cyan);
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .stage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .stage-card {
+            background: rgba(10, 10, 10, 0.5);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(139, 92, 246, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .stage-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-purple);
+            box-shadow: 0 5px 25px rgba(139, 92, 246, 0.15);
+        }
+
+        .stage-card h4 {
+            color: var(--light-purple);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .stage-card h4 i {
+            color: var(--accent-cyan);
+        }
+
+        .stage-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .stage-card h5 {
+            color: var(--text-secondary);
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* --- Responsive (Mobile & Tablettes) --- */
+        @media (max-width: 900px) {
+            .table-head { display: none; }
+            
+            .table-row {
+                grid-template-columns: 1fr;
+                padding: 1rem 0;
+            }
+            
+            .cell {
+                padding: 0.5rem 1.5rem;
+            }
+            
+            .cell-title {
+                color: var(--light-purple);
+                padding-bottom: 0.5rem;
+            }
+            
+            .cyber-comparison-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cyber-table-header-info {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
         }
 
         .nav-cv {
@@ -1511,6 +1794,21 @@
                 overflow-x: hidden;
             }
 
+            .stage-table-container {
+            .stage-summary-container {
+                padding: 1.5rem;
+            }
+            .stage-header {
+                padding-bottom: 1.5rem;
+                margin-bottom: 2rem;
+            }
+            .stage-grid {
+                grid-template-columns: 1fr;
+            }
+            .context-row, .mission-stack-row, .comparative-row {
+                grid-template-columns: 1fr;
+            }
+
             .project-card ul,
             .timeline-item ul {
                 margin-left: 1rem !important;
@@ -1741,6 +2039,112 @@
                 opacity: 0.5;
             }
         }
+
+        /* ===== TEMOIGNAGES ===== */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .testimonial-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.1), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s, transform 0.5s;
+            transform: scale(0);
+        }
+
+        .testimonial-card:hover::before {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .testimonial-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 40px rgba(6, 182, 212, 0.4),
+                0 15px 50px rgba(6, 182, 212, 0.3);
+            transform: translateY(-10px) rotate(1deg);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-text::before {
+            content: '“';
+            font-size: 3rem;
+            color: var(--light-purple);
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            opacity: 0.3;
+            z-index: 0;
+            line-height: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-cyan);
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
+        }
+
+        .author-details strong {
+            display: block;
+            color: var(--primary-purple);
+            font-size: 1.1rem;
+        }
+
+        .author-details span {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+            .testimonial-card {
+                padding: 1.5rem;
+            }
+        }
     </style>
 </head>
 
@@ -1756,21 +2160,22 @@
 
         <ul id="navMenu" class="nav-menu">
             <li><a href="#home">Accueil</a></li>
-            <li><a href="#bilan">Bilan</a></li>
-            <li><a href="#auto-eval">Auto-éval</a></li>
-            <li><a href="#skills">Compétences</a></li>
-            <li><a href="#qualites">Qualités</a></li>
-            <li><a href="#distinctions">Distinctions</a></li>
-            <li><a href="#projets-personnels">Projets</a></li>
             <li><a href="#formation">Formation</a></li>
             <li><a href="#experience">Expérience</a></li>
             <li><a href="#decouverte-pro">Découverte</a></li>
+            <li><a href="#stage-but3">Stage BUT3</a></li>
+            <li><a href="#synthesis-and-analysis">Projets & Bilan</a></li>
+            <li><a href="#bilan">Bilan S5/S6</a></li>
+            <li><a href="#auto-eval">Auto-éval</a></li>
+            <li><a href="#distinctions">Distinctions</a></li>
+            <li><a href="#skills">Compétences</a></li>
             <li><a href="#passeport-culturel">Passeport</a></li>
             <li><a href="#objectifs">Objectifs</a></li>
             <li><a href="#engagement">Engagement</a></li>
             <li><a href="#passions">Passions</a></li>
             <li><a href="#langues">Langues</a></li>
-            <li><a href="#certifications">Certifs</a></li>
+            <li><a href="#certifications">Certifications</a></li>
+            <li><a href="#temoignages">Témoignages</a></li>
             <li><a href="#contact">Contact</a></li>
             <li><a href="resume/CV_Wajdi_Ben_Ouirane_D.pdf" download class="nav-cv"><i class="fas fa-download"></i> CV</a></li>
         </ul>
@@ -1791,8 +2196,8 @@
             <!-- Bloc de texte de présentation (gauche sur desktop) -->
             <div class="hero-text">
                 <h1>Salut, je suis <span class="name">Wajdi Ben Ouirane</span></h1>
-                <p class="title"><i class="fas fa-shield-halved"></i>Etudiant en BUT3 informatique</p>
-                <p>Étudiant en BUT Informatique, dans le cadre d'une co-diplomation entre l'ISI et l'Université Sorbonne Paris Nord. Passionné par l'exploitation des données et l'Intelligence Artificielle.</p>
+                <p class="title"><i class="fas fa-shield-halved"></i>Étudiant en BUT Informatique</p>
+                <p>Je suis en double diplôme entre l'ISI en Tunisie et l'Université Sorbonne Paris Nord. Ce qui me passionne vraiment, c'est de travailler avec les données et l'intelligence artificielle.</p>
                 <!-- Boutons d'action principaux -->
                 <div class="hero-buttons">
                     <a href="#contact" class="btn btn-primary"><i class="fas fa-envelope"></i> Me Contacter</a>
@@ -1808,9 +2213,367 @@
             </div>
         </div>
     </section>
+     <section id="formation">
+        <h2>Formation</h2>
+        
+        <div class="timeline-item">
+            <h3>
+                <img src="images/uspn.jpg" alt="Logo USPN" class="logo">
+                BUT Informatique (3ème année)
+            </h3>
+            <span class="date">2025-2026</span>
+            <p class="location">Université Sorbonne Paris Nord - IUT de Villetaneuse</p>
+            <p>Co-diplomation avec l'Institut Supérieur d'Informatique (ISI) - Double formation France-Tunisie</p>
+            <p><strong>Spécialisation Data Science, IA et Cybersécurité :</strong> Formation orientée vers la conception logicielle, l'analyse de données complexes et la sécurité des systèmes.</p>
+            <ul style="color: var(--accent-cyan); margin-left: 2rem; padding-left: 1rem;">
+                <li>Développement de modèles d'Intelligence Artificielle et Deep Learning</li>
+                <li>Création d'applications mobiles (Flutter, Dart, React Native)</li>
+                <li>Conception de projets applicatifs complets (ex: application Miaam avec algorithme SVD, jeu BlindWalk)</li>
+                <li>Architecture et sécurisation des bases de données</li>
+            </ul>
+        </div>
+
+        <div class="timeline-item">
+            <h3>
+                <img src="images/isi-1.jpg" alt="Logo ISI" class="logo">
+                Licence en Sciences Informatiques
+            </h3>
+            <span class="date">2023-2025</span>
+            <p class="location">Institut Supérieur d'Informatique (ISI), Tunisie</p>
+            <p>C'est là que j'ai acquis des bases très solides en programmation, en algorithmique et en gestion de bases de données. C'était une formation plus théorique mais essentielle.</p>
+            <ul style="color: var(--accent-cyan); margin-left: 2rem; padding-left: 1rem;">
+                <li>J'ai beaucoup programmé en Python.</li>
+                <li>J'ai appris à gérer des bases de données comme PostgreSQL, MySQL, et même du NoSQL.</li>
+                <li>J'ai étudié le fonctionnement interne des systèmes informatiques.</li>
+            </ul>
+            <button onclick="openCertModal('images/BAC+2.png')" class="btn btn-secondary" style="margin-top: 1rem;"><i class="fas fa-file-certificate"></i> Voir l'attestation de réussite</button>
+        </div>
+
+        <div class="timeline-item">
+            <h3>
+                <img src="images/LTD.jpg" alt="Logo Lycée Pilote" class="logo">
+                Baccalauréat Mathématiques
+            </h3>
+            <span class="date">2023</span>
+            <p class="location">Lycée Houmt Souk Djerba, Tunisie</p>
+            <p>J'ai obtenu mon baccalauréat en section Mathématiques avec une <strong style="color: var(--accent-cyan);">mention Très Bien (17.19/20)</strong>. C'est ce qui m'a ouvert les portes des études en informatique.</p>
+            <button onclick="openCertModal('images/BAC.jpg')" class="btn btn-secondary" style="margin-top: 1rem;"><i class="fas fa-graduation-cap"></i> Voir le diplôme</button>
+        </div>
+    </section>
+
+    <section id="experience">
+        <h2>Expérience Professionnelle</h2>
+        
+        <div class="timeline-item">
+            <h3>
+                <img src="images/flexos.png" alt="Logo FleXos" class="logo">
+                Ingénieur Système & Sécurité - Stage
+            </h3>
+            <span class="date">Stage</span>
+            <p class="location">FleXos</p>
+            <p><strong>Mission :</strong> Refonte complète de l'architecture de gestion des identités (IAM) pour renforcer la sécurité du système d'information.</p>
+            <ul>
+                <li>Déploiement et sécurisation d'une infrastructure Active Directory centralisée.</li>
+                <li>Durcissement de la sécurité via l'implémentation de GPO (Group Policy Objects) granulaires pour la gestion des droits utilisateurs.</li>
+                <li>Configuration du protocole LDAPS (LDAP over SSL) pour chiffrer les flux d'authentification et prévenir les attaques de type Man-in-the-Middle.</li>
+                <li>Audit et restructuration des groupes utilisateurs pour optimiser les accès ressources.</li>
+            </ul>
+            <button onclick="openCertModal('images/flexosstage.png')" class="btn btn-secondary" style="margin-top: 1rem;"><i class="fas fa-file-contract"></i> Voir l'attestation</button>
+        </div>
+
+        <div class="timeline-item">
+            <h3>
+                <img src="images/abbk.png" alt="Logo ABBK PhysicsWorks" class="logo">
+                Développeur Logiciel .NET - Stage
+            </h3>
+            <span class="date">Stage</span>
+            <p class="location">ABBK PhysicsWorks</p>
+            <p><strong>Mission :</strong> Conception d'une solution logicielle Desktop pour l'optimisation des processus internes.</p>
+            <ul>
+                <li>Développement d'une application Desktop robuste en C# / .NET.</li>
+                <li>Implémentation de l'architecture MVVM (Model-View-ViewModel) pour assurer la maintenabilité du code et la séparation interface/logique métier.</li>
+                <li>Création d'interfaces utilisateurs ergonomiques (UI/UX) et connexion aux données existantes.</li>
+            </ul>
+            <button onclick="openCertModal('images/abbkstage.png')" class="btn btn-secondary" style="margin-top: 1rem;"><i class="fas fa-file-contract"></i> Voir l'attestation</button>
+        </div>
+    </section>
+    <section id="decouverte-pro">
+        <h2>Découverte du monde professionnel</h2>
+        <div class="timeline-item">
+            <h3><i class="fas fa-briefcase"></i> Culture d'entreprise</h3>
+            <span class="date">Immersion en entreprise</span>
+            <p>J'ai découvert la discipline nécessaire en entreprise : bien documenter, suivre des process, animer des réunions et rendre compte de l'avancement.</p>
+            <ul>
+                <li>Participation à des points quotidiens, revues de projet et présentations de résultats.</li>
+                <li>Utilisation d'outils de suivi : tickets, Teams, Git et documentation partagée.</li>
+                <li>Gestion de blocages techniques par analyse, test et validation progressive.</li>
+                <li>Travail coordonné avec des profils techniques et métiers pour satisfaire les besoins clients.</li>
+            </ul>
+        </div>
+        <div class="timeline-item">
+            <h3><i class="fas fa-comment-dots"></i> Travail collaboratif</h3>
+            <span class="date">Compétences relationnelles</span>
+            <ul>
+                <li>Communication claire des difficultés et des solutions envisagées.</li>
+                <li>Écoute active et adaptation à des demandes changeantes.</li>
+                <li>Gestion de conflits techniques par des compromis constructifs.</li>
+                <li>Priorisation des tâches en fonction du planning de l'équipe.</li>
+            </ul>
+        </div>
+    </section>
+    <section id="stage-but3">
+    <h2>Stage BUT 3 : Ingénieur Data & Automatisation</h2>
+    <div class="stage-table-container fade-in">
+    <div class="stage-summary-container fade-in">
+        
+        <div style="text-align: center; margin-bottom: 2.5rem;">
+            <h3 style="color: var(--light-purple); font-size: 1.6rem; margin-bottom: 0.5rem;">
+                <i class="fas fa-building"></i> Makseb Solutions
+            </h3>
+            <span style="color: var(--accent-cyan); font-weight: 600; font-size: 1.1rem;">
+                <i class="fas fa-calendar-alt"></i> Avril 2026 – Août 2026
+            </span>
+        <div class="stage-header">
+            <h3><i class="fas fa-building"></i> Makseb Solutions</h3>
+            <span class="stage-date"><i class="fas fa-calendar-alt"></i> Avril 2026 – Août 2026</span>
+        </div>
+
+        <div style="overflow-x: auto;">
+            <table class="bilan-table">
+                <thead>
+                    <tr>
+                        <th><i class="fas fa-layer-group"></i> Catégorie</th>
+                        <th><i class="fas fa-tasks"></i> Détails & Réalisations</th>
+                        <th><i class="fas fa-tools"></i> Outils & Technologies</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="highlight-col"><i class="fas fa-briefcase"></i> Missions Principales</td>
+                        <td>
+                            Conception de workflows et intégration d'IA pour optimiser le parcours client.<br><br>
+                            Centralisation des données, création de KPI en SQL et développement de dashboards décisionnels.
+                        </td>
+                        <td>
+                            <div class="tech-tags">
+                                <span>n8n</span> <span>OpenAI API</span> <span>PostgreSQL</span> <span>Looker Studio</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="highlight-col"><i class="fas fa-star"></i> Points Forts</td>
+                        <td>
+                            Découverte de l'automatisation des processus métier (BPA).<br><br>
+                            Projet à fort impact avec résultats directs.
+                        </td>
+                        <td>
+                            Montée en compétence en data analytics et IA appliquée.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="highlight-col"><i class="fas fa-exclamation-triangle"></i> Points de Vigilance</td>
+                        <td>
+                            Qualité et cohérence des données.<br><br>
+                            Sécurisation des flux et confidentialité.
+                        </td>
+                        <td>
+                            Complexité des intégrations API.<br><br>
+                            Maintenance et fiabilité des automatisations.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="highlight-col"><i class="fas fa-graduation-cap"></i> Acquis pour la suite</td>
+                        <td>
+                            Compréhension des enjeux business de la data/IA.<br><br>
+                            Automatisation et intégration de systèmes.
+                        </td>
+                        <td>
+                            SQL et analyse de données.<br><br>
+                            Utilisation d’API et architectures de données.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        <div class="stage-grid">
+            <!-- Missions -->
+            <div class="stage-card">
+                <h4><i class="fas fa-briefcase"></i> Missions Principales</h4>
+                <p>Conception de workflows et intégration d'IA pour optimiser le parcours client. Centralisation des données, création de KPI en SQL et développement de dashboards décisionnels.</p>
+                <h5><i class="fas fa-tools"></i> Outils & Technologies</h5>
+                <div class="cell-tech">
+                    <span class="tag">n8n</span>
+                    <span class="tag">OpenAI API</span>
+                    <span class="tag">PostgreSQL</span>
+                    <span class="tag">Looker Studio</span>
+                </div>
+            </div>
+
+            <!-- Points Forts -->
+            <div class="stage-card">
+                <h4><i class="fas fa-star"></i> Points Forts</h4>
+                <ul>
+                    <li>Découverte de l'automatisation des processus métier (BPA).</li>
+                    <li>Projet à fort impact avec résultats directs.</li>
+                    <li>Montée en compétence en data analytics et IA appliquée.</li>
+                </ul>
+            </div>
+
+            <!-- Points de Vigilance -->
+            <div class="stage-card">
+                <h4><i class="fas fa-exclamation-triangle"></i> Points de Vigilance</h4>
+                <ul>
+                    <li>Gestion de la qualité et de la cohérence des données.</li>
+                    <li>Sécurisation des flux de données et respect de la confidentialité.</li>
+                    <li>Complexité des intégrations API.</li>
+                    <li>Maintenance et fiabilité des automatisations à long terme.</li>
+                </ul>
+            </div>
+
+            <!-- Acquis -->
+            <div class="stage-card">
+                <h4><i class="fas fa-graduation-cap"></i> Acquis pour la suite</h4>
+                <ul>
+                    <li>Compréhension des enjeux business de la data/IA.</li>
+                    <li>Maîtrise de l'automatisation et de l'intégration de systèmes.</li>
+                    <li>Compétences solides en SQL et analyse de données.</li>
+                    <li>Expérience pratique avec les API et les architectures de données.</li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+
+<section id="synthesis-and-analysis" style="padding: 5rem 2rem;">
+    <div style="max-width: 1200px; margin: 0 auto;">
+        <!-- Section 1: Synthèse des Projets -->
+        <div style="background: #1a1a1a; border-radius: 16px; padding: 2.5rem; border: 1px solid rgba(139, 92, 246, 0.2); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2); margin-bottom: 3rem;">
+            <h2 style="color: #A78BFA; font-size: 1.8rem; font-weight: 700; text-align: left; transform: none; left: auto; margin-bottom: 0.25rem; position: static;">Synthèse des Projets</h2>
+            <p style="color: #9ca3af; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2rem; font-size: 0.875rem;">FICHES RÉCAPITULATIVES</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
+                <!-- Fiche Projet A -->
+                <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(139, 92, 246, 0.15); border-radius: 12px; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; transition: all 0.3s ease;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div>
+                            <span style="background-color: rgba(139, 92, 246, 0.15); color: #A78BFA; font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.75rem; border-radius: 9999px;">S5 - BUT 3</span>
+                            <h3 style="font-size: 1.25rem; font-weight: 600; margin-top: 0.75rem; color: #ffffff;">App Frigo Anti-Gaspi</h3>
+                        </div>
+                        <a href="https://github.com/WXJDI" target="_blank" title="Voir sur GitHub" style="color: #9ca3af; text-decoration: none; font-size: 1.5rem; transition: color 0.2s;">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                    <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1rem; font-size: 0.9rem; line-height: 1.5;">
+                        <li>
+                            <strong style="display: block; color: #A78BFA; font-weight: 500; margin-bottom: 0.25rem;">Objectif</strong>
+                            <span style="color: #9ca3af;">Développer une application mobile multiplateforme capable de suggérer des recettes personnalisées à partir des ingrédients disponibles, avec un fonctionnement entièrement hors-ligne.</span>
+                        </li>
+                        <li>
+                            <strong style="display: block; color: #A78BFA; font-weight: 500; margin-bottom: 0.25rem;">Équipe & Durée</strong>
+                            <span style="color: #9ca3af;">6 étudiants, 6 mois</span>
+                        </li>
+                        <li>
+                            <strong style="display: block; color: #A78BFA; font-weight: 500; margin-bottom: 0.25rem;">Stack Technique</strong>
+                            <span style="color: #9ca3af;">Flutter, Dart, SQLite (base de données locale), Git.</span>
+                        </li>
+                        <li>
+                            <strong style="display: block; color: #A78BFA; font-weight: 500; margin-bottom: 0.25rem;">Bilan</strong>
+                            <span style="color: #9ca3af;">L'application est fonctionnelle, offrant une expérience utilisateur adaptative et incluant un suivi des apports nutritionnels. La gestion des données locales est robuste.</span>
+                        </li>
+                        <li>
+                            <strong style="display: block; color: #A78BFA; font-weight: 500; margin-bottom: 0.25rem;">Valeur ajoutée</strong>
+                            <span style="color: #9ca3af;">Maîtrise du cycle de vie d'une application mobile cross-platform (Flutter) et des stratégies de persistance de données embarquées (SQLite).</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Fiche Projet B -->
+                <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(139, 92, 246, 0.15); border-radius: 12px; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; transition: all 0.3s ease;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div>
+                            <span style="background-color: rgba(139, 92, 246, 0.15); color: #A78BFA; font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.75rem; border-radius: 9999px;">S5 - BUT 3</span>
+                            <h3 style="font-size: 1.25rem; font-weight: 600; margin-top: 0.75rem; color: #ffffff;">Générateur de Maillages Voronoï</h3>
+                        </div>
+                        <a href="https://github.com/WXJDI" target="_blank" title="Voir sur GitHub" style="color: #9ca3af; text-decoration: none; font-size: 1.5rem; transition: color 0.2s;">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                    <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1rem; font-size: 0.9rem; line-height: 1.5;">
+                        <li>
+                            <strong style="display: block; color: #A78BFA; font-weight: 500; margin-bottom: 0.25rem;">Objectif</strong>
+                            <span style="color: #9ca3af;">Implémenter et visualiser l'algorithme de partitionnement de l'espace de Voronoï en 2D à l'aide de Python, en se concentrant sur la performance et la clarté de la représentation.</span>
+                        </li>
+                        <li>
+                            <strong style="display: block; color: #A78BFA; font-weight: 500; margin-bottom: 0.25rem;">Équipe & Durée</strong>
+                            <span style="color: #9ca3af;">6 étudiants, 1 mois</span>
+                        </li>
+                        <li>
+                            <strong style="display: block; color: #A78BFA; font-weight: 500; margin-bottom: 0.25rem;">Stack Technique</strong>
+                            <span style="color: #9ca3af;">Python, Tkinter, NumPy, Matplotlib.</span>
+                        </li>
+                        <li>
+                            <strong style="display: block; color: #A78BFA; font-weight: 500; margin-bottom: 0.25rem;">Bilan</strong>
+                            <span style="color: #9ca3af;">Le résultat est un logiciel interactif qui génère et exporte des diagrammes de Voronoï, offrant un outil visuel pour l'analyse géométrique.</span>
+                        </li>
+                        <li>
+                            <strong style="display: block; color: #A78BFA; font-weight: 500; margin-bottom: 0.25rem;">Valeur ajoutée</strong>
+                            <span style="color: #9ca3af;">Mise en pratique d'algorithmes géométriques complexes et compétences en visualisation de données scientifiques avec Matplotlib et NumPy.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Analyse Rétrospective -->
+        <div style="background: #1a1a1a; border-radius: 16px; padding: 2.5rem; border: 1px solid rgba(139, 92, 246, 0.2); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);">
+            <h2 style="color: #A78BFA; font-size: 1.8rem; font-weight: 700; text-align: left; transform: none; left: auto; margin-bottom: 0.25rem; position: static;">Analyse Rétrospective</h2>
+            <p style="color: #9ca3af; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2rem; font-size: 0.875rem;">RETOUR D'EXPÉRIENCE</p>
+
+            <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem; line-height: 1.6;">
+                    <thead style="border-bottom: 1px solid rgba(139, 92, 246, 0.2);">
+                        <tr>
+                            <th style="padding: 1rem 1.25rem; text-align: left; color: #9ca3af; font-weight: 500; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em;">Projet</th>
+                            <th style="padding: 1rem 1.25rem; text-align: left; color: #9ca3af; font-weight: 500; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em;">Forces du groupe</th>
+                            <th style="padding: 1rem 1.25rem; text-align: left; color: #9ca3af; font-weight: 500; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em;">Points de vigilance</th>
+                            <th style="padding: 1rem 1.25rem; text-align: left; color: #9ca3af; font-weight: 500; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em;">Découvertes</th>
+                            <th style="padding: 1rem 1.25rem; text-align: left; color: #9ca3af; font-weight: 500; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em;">Obstacles</th>
+                            <th style="padding: 1rem 1.25rem; text-align: left; color: #9ca3af; font-weight: 500; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em;">Acquis</th>
+                            <th style="padding: 1rem 1.25rem; text-align: left; color: #9ca3af; font-weight: 500; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em;">À refaire</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background-color: rgba(139, 92, 246, 0.04);">
+                            <td style="padding: 1rem 1.25rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); font-weight: 600; color: #A78BFA;">App Frigo Anti-Gaspi</td>
+                            <td style="padding: 1rem 1.25rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); color: #9ca3af;">Excellente cohésion d'équipe ayant abouti à un produit final complet et bien fini.</td>
+                            <td style="padding: 1rem 1.25rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); color: #9ca3af;">Gestion des conflits de code (merge conflicts) sur Git, qui a ralenti le développement à plusieurs reprises.</td>
+                            <td style="padding: 1rem 1.25rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); color: #9ca3af;">La robustesse de l'écosystème Flutter pour le développement hors-ligne et la gestion d'état.</td>
+                            <td style="padding: 1rem 1.25rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); color: #9ca3af;">La complexité de la synchronisation des données en temps réel entre les différentes vues a nécessité plusieurs refactorisations.</td>
+                            <td style="padding: 1rem 1.25rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); color: #9ca3af;">Maîtrise de l'environnement mobile (Dart/SQLite) et du versioning collaboratif.</td>
+                            <td style="padding: 1rem 1.25rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); color: #9ca3af;">Définir une convention de nommage et des règles de branching Git plus strictes. Établir un schéma de données formel avant de coder.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 1rem 1.25rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); font-weight: 600; color: #A78BFA;">Générateur de Maillages Voronoï</td>
+                            <td style="padding: 1rem 1.25rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); color: #9ca3af;">Qualité de la restitution visuelle et performance générale de l'algorithme sur des cas standards.</td>
+                            <td style="padding: 1rem 1.25rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); color: #9ca3af;">Sous-estimation de la complexité mathématique requise pour traiter les cas dégénérés et les exceptions géométriques.</td>
+                            <td style="padding: 1rem 1.25rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); color: #9ca3af;">Le potentiel avancé de Matplotlib pour créer des visualisations interactives et personnalisées.</td>
+                            <td style="padding: 1rem 1.25rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); color: #9ca3af;">Dégradation des performances avec un grand nombre de points, révélant des défis d'optimisation.</td>
+                            <td style="padding: 1rem 1.25rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); color: #9ca3af;">Application de la logique géométrique, manipulation avancée de tableaux avec NumPy.</td>
+                            <td style="padding: 1rem 1.25rem; border-bottom: 1px solid rgba(255, 255, 255, 0.08); color: #9ca3af;">Adopter une approche itérative : développer une version minimale fonctionnelle (MVP), puis l'enrichir progressivement.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
 
 
 
+<!-- =================================================================== -->
+<!-- SECTION BILAN BUT3                                                   -->
+<!-- =================================================================== -->
 <section id="bilan">
     <h2>Bilan BUT3</h2>
     <div class="timeline-item">
@@ -1844,6 +2607,9 @@
     </div>
 </section>
 
+<!-- =================================================================== -->
+<!-- SECTION AUTO-ÉVALUATION                                              -->
+<!-- =================================================================== -->
 <section id="auto-eval">
     <h2>Auto-évaluation</h2>
     <div class="projects-grid">
@@ -1873,6 +2639,32 @@
                 <li>Analyse de données et mise en place d'algorithmes de recommandation.</li>
                 <li>Participation à des CTF et compétences en investigation numérique.</li>
             </ul>
+        </div>
+    </div>
+</section>
+
+<!-- =================================================================== -->
+<!-- SECTION ACTIVITÉS ET DISTINCTIONS                                    -->
+<!-- =================================================================== -->
+<section id="distinctions">
+    <h2>Activités et Distinctions</h2>
+    <div class="timeline-item">
+        <h3>
+            <img src="images/nuit.jpg" alt="Logo Nuit de l'Info" class="logo">
+            NUIT DE L'INFO
+        </h3>
+        <span class="date">Édition 2025 - 2026</span>
+        <p class="location">Université Sorbonne Paris Nord</p>
+        <p>Participation à cette compétition nationale de développement consistant à concevoir et implémenter une application web complète en une seule nuit, en répondant à des défis spécifiques ("Défis Partenaires").</p>
+        <ul>
+            <li><strong>Développement Full-Stack :</strong> Conception rapide d'une interface utilisateur et d'un backend fonctionnel.</li>
+            <li><strong>Intégration de l'IA :</strong> Mise en œuvre de solutions basées sur les données pour répondre aux problématiques du sujet.</li>
+            <li><strong>Gestion de projet agile :</strong> Collaboration intense en équipe et respect de deadlines extrêmement serrées (15h de code non-stop).</li>
+        </ul>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem; align-items: center;">
+            <img src="images/nuit_info_1.jpeg" alt="Nuit de l'Info 1" onclick="openCertModal('images/nuit_info_1.jpeg')" style="width: 100%; height: 250px; object-fit: cover; object-position: center top; border-radius: 8px; cursor: pointer; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+            <img src="images/nuit_info_2.jpeg" alt="Nuit de l'Info 2" onclick="openCertModal('images/nuit_info_2.jpeg')" style="width: 100%; height: 250px; object-fit: cover; object-position: center center; border-radius: 8px; cursor: pointer; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+            <img src="images/nuit_info_3.jpeg" alt="Nuit de l'Info 3" onclick="openCertModal('images/nuit_info_3.jpeg')" style="width: 100%; height: 250px; object-fit: cover; object-position: center; border-radius: 8px; cursor: pointer; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
         </div>
     </div>
 </section>
@@ -1957,197 +2749,24 @@
     <!-- SECTION MES QUALITÉS -->
     <!-- Soft skills: Adaptabilité, Travail en équipe, Détermination -->
     <!-- =================================================================== -->
-    <section id="qualites">
-        <h2>Mes Qualités</h2>
-        <!-- Grille de cartes de qualités avec icônes -->
-        <div class="skills-grid">
-            <div class="skill-card fade-in">
-                <div class="quality-icon">
-                    <i class="fas fa-sync-alt"></i>
-                </div>
-                <h3>Adaptabilité</h3>
-                <p>Capacité à m'adapter rapidement aux nouvelles technologies et environnements de travail, tout en maintenant une performance optimale.</p>
-            </div>
-            <div class="skill-card fade-in">
-                <div class="quality-icon">
-                    <i class="fas fa-users"></i>
-                </div>
-                <h3>Travail en Groupe</h3>
-                <p>Excellente collaboration au sein d'équipes multidisciplinaires, communication efficace et contribution active aux objectifs communs.</p>
-            </div>
-            <div class="skill-card fade-in">
-                <div class="quality-icon">
-                    <i class="fas fa-trophy"></i>
-                </div>
-                <h3>Détermination</h3>
-                <p>Persévérance face aux défis techniques, engagement total dans la réussite des projets et dépassement des objectifs fixés.</p>
-            </div>
-        </div>
-    </section>
+    
 
-<section id="distinctions">
-    <h2>Activités et Distinctions</h2>
-    <div class="timeline-item">
-        <h3>
-            <img src="images/nuit.jpg" alt="Logo Nuit de l'Info" class="logo">
-            NUIT DE L'INFO
-        </h3>
-        <span class="date">Édition 2025 - 2026</span>
-        <p class="location">Université Sorbonne Paris Nord</p>
-        <p>Participation à cette compétition nationale de développement consistant à concevoir et implémenter une application web complète en une seule nuit, en répondant à des défis spécifiques ("Défis Partenaires").</p>
-        <ul>
-            <li><strong>Développement Full-Stack :</strong> Conception rapide d'une interface utilisateur et d'un backend fonctionnel.</li>
-            <li><strong>Intégration de l'IA :</strong> Mise en œuvre de solutions basées sur les données pour répondre aux problématiques du sujet.</li>
-            <li><strong>Gestion de projet agile :</strong> Collaboration intense en équipe et respect de deadlines extrêmement serrées (15h de code non-stop).</li>
-        </ul>
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem; align-items: center;">
-            <img src="images/nuit_info_1.jpeg" alt="Nuit de l'Info 1" onclick="openCertModal('images/nuit_info_1.jpeg')" style="width: 100%; height: 250px; object-fit: cover; object-position: center top; border-radius: 8px; cursor: pointer; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-            <img src="images/nuit_info_2.jpeg" alt="Nuit de l'Info 2" onclick="openCertModal('images/nuit_info_2.jpeg')" style="width: 100%; height: 250px; object-fit: cover; object-position: center center; border-radius: 8px; cursor: pointer; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-            <img src="images/nuit_info_3.jpeg" alt="Nuit de l'Info 3" onclick="openCertModal('images/nuit_info_3.jpeg')" style="width: 100%; height: 250px; object-fit: cover; object-position: center; border-radius: 8px; cursor: pointer; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-        </div>
-    </div>
-</section>
 
-<section id="projets-personnels">
-        <h2>Projets personnels</h2>
-        <div class="projects-grid">
-            <div class="project-card fade-in">
-                <img src="images/dev.jpg" alt="Projet personnel développement" class="skill-image">
-                <h3><i class="fas fa-laptop-code"></i> Portfolio personnel</h3>
-                <p>Conception et développement de ce site pour présenter mes compétences, mon CV et mes réalisations.</p>
-                <p><strong>Points clés :</strong> responsive, accessible, navigation claire et CV disponible en PDF.</p>
-            </div>
-            <div class="project-card fade-in">
-                <img src="images/Miaam.png" alt="Projet Miaam" class="skill-image">
-                <h3><i class="fas fa-seedling"></i> Miaam - Anti-gaspillage</h3>
-                <p>Projet technique autour de la recommandation intelligente et de l'utilisation responsable des ressources.</p>
-                <p><strong>Compétences :</strong> Python, data pipelines, modélisation et présentation de prototype.</p>
-            </div>
-            <div class="project-card fade-in">
-                <img src="./images/blind.png" alt="Projet cybersécurité" class="skill-image">
-                <h3><i class="fas fa-shield-virus"></i> BlindWalk</h3>
-                <p>Conception et développement de la logique d'un jeu de sensibilisation en Python.</p>
-                <p><strong>Valeur ajoutée :</strong> analyse des besoins, résolution de bugs, et tests utilisateurs.</p>                </div>
-        </div>
-    </section>
+
 
     <!-- =================================================================== -->
     <!-- SECTION FORMATION -->
     <!-- Parcours académique: BUT, Licence et Baccalauréat -->
     <!-- =================================================================== -->
-    <section id="formation">
-        <h2>Formation</h2>
-        
-        <div class="timeline-item">
-            <h3>
-                <img src="images/uspn.jpg" alt="Logo USPN" class="logo">
-                BUT Informatique (3ème année)
-            </h3>
-            <span class="date">2025-2026</span>
-            <p class="location">Université Sorbonne Paris Nord - IUT de Villetaneuse</p>
-            <p>Co-diplomation avec l'Institut Supérieur d'Informatique (ISI) - Double formation France-Tunisie</p>
-            <p><strong>Spécialisation Data Science, IA et Cybersécurité :</strong> Formation orientée vers la conception logicielle, l'analyse de données complexes et la sécurité des systèmes.</p>
-            <ul style="color: var(--accent-cyan); margin-left: 2rem; padding-left: 1rem;">
-                <li>Développement de modèles d'Intelligence Artificielle et Deep Learning</li>
-                <li>Création d'applications mobiles (Flutter, Dart, React Native)</li>
-                <li>Conception de projets applicatifs complets (ex: application Miaam avec algorithme SVD, jeu BlindWalk)</li>
-                <li>Architecture et sécurisation des bases de données</li>
-            </ul>
-        </div>
-
-        <div class="timeline-item">
-            <h3>
-                <img src="images/isi-1.jpg" alt="Logo ISI" class="logo">
-                Licence en Sciences Informatiques
-            </h3>
-            <span class="date">2023-2025</span>
-            <p class="location">Institut Supérieur d'Informatique (ISI), Tunisie</p>
-            <p><strong>Formation à dominante académique et technique :</strong> Solides bases en ingénierie logicielle, algorithmique et gestion des systèmes d'information.</p>
-            <ul style="color: var(--accent-cyan); margin-left: 2rem; padding-left: 1rem;">
-                <li>Programmation orientée objet et développement scientifique (Python)</li>
-                <li>Modélisation et optimisation de bases de données relationnelles (PostgreSQL, MySQL) et NoSQL (MongoDB, Redis, CockroachDB)</li>
-                <li>Fondements théoriques en informatique et architecture des systèmes</li>
-            </ul>
-            <button onclick="openCertModal('images/BAC+2.png')" class="btn btn-secondary" style="margin-top: 1rem;"><i class="fas fa-file-certificate"></i> Voir l'attestation de réussite</button>
-        </div>
-
-        <div class="timeline-item">
-            <h3>
-                <img src="images/LTD.jpg" alt="Logo Lycée Pilote" class="logo">
-                Baccalauréat Mathématiques
-            </h3>
-            <span class="date">2023</span>
-            <p class="location">Lycée Houmt Souk Djerba, Tunisie</p>
-            <p>Diplôme du baccalauréat section Mathématiques avec <strong style="color: var(--accent-cyan);">mention Très Bien (17.19/20) </strong></p>
-            <button onclick="openCertModal('images/BAC.jpg')" class="btn btn-secondary" style="margin-top: 1rem;"><i class="fas fa-graduation-cap"></i> Voir le diplôme</button>
-        </div>
-    </section>
+   
 
     <!-- =================================================================== -->
     <!-- SECTION EXPÉRIENCE PROFESSIONNELLE -->
     <!-- Stages en réseaux et cybersécurité -->
     <!-- =================================================================== -->
-<section id="experience">
-        <h2>Expérience Professionnelle</h2>
-        
-        <div class="timeline-item">
-            <h3>
-                <img src="images/flexos.png" alt="Logo FleXos" class="logo">
-                Ingénieur Système & Sécurité - Stage
-            </h3>
-            <span class="date">Stage</span>
-            <p class="location">FleXos</p>
-            <p><strong>Mission :</strong> Refonte complète de l'architecture de gestion des identités (IAM) pour renforcer la sécurité du système d'information.</p>
-            <ul>
-                <li>Déploiement et sécurisation d'une infrastructure Active Directory centralisée.</li>
-                <li>Durcissement de la sécurité via l'implémentation de GPO (Group Policy Objects) granulaires pour la gestion des droits utilisateurs.</li>
-                <li>Configuration du protocole LDAPS (LDAP over SSL) pour chiffrer les flux d'authentification et prévenir les attaques de type Man-in-the-Middle.</li>
-                <li>Audit et restructuration des groupes utilisateurs pour optimiser les accès ressources.</li>
-            </ul>
-            <button onclick="openCertModal('images/flexosstage.png')" class="btn btn-secondary" style="margin-top: 1rem;"><i class="fas fa-file-contract"></i> Voir l'attestation</button>
-        </div>
 
-        <div class="timeline-item">
-            <h3>
-                <img src="images/abbk.png" alt="Logo ABBK PhysicsWorks" class="logo">
-                Développeur Logiciel .NET - Stage
-            </h3>
-            <span class="date">Stage</span>
-            <p class="location">ABBK PhysicsWorks</p>
-            <p><strong>Mission :</strong> Conception d'une solution logicielle Desktop pour l'optimisation des processus internes.</p>
-            <ul>
-                <li>Développement d'une application Desktop robuste en C# / .NET.</li>
-                <li>Implémentation de l'architecture MVVM (Model-View-ViewModel) pour assurer la maintenabilité du code et la séparation interface/logique métier.</li>
-                <li>Création d'interfaces utilisateurs ergonomiques (UI/UX) et connexion aux données existantes.</li>
-            </ul>
-            <button onclick="openCertModal('images/abbkstage.png')" class="btn btn-secondary" style="margin-top: 1rem;"><i class="fas fa-file-contract"></i> Voir l'attestation</button>
-        </div>
-    </section>
 
-    <section id="decouverte-pro">
-        <h2>Découverte du monde professionnel</h2>
-        <div class="timeline-item">
-            <h3><i class="fas fa-briefcase"></i> Culture d'entreprise</h3>
-            <span class="date">Immersion en entreprise</span>
-            <p>J'ai découvert la discipline nécessaire en entreprise : bien documenter, suivre des process, animer des réunions et rendre compte de l'avancement.</p>
-            <ul>
-                <li>Participation à des points quotidiens, revues de projet et présentations de résultats.</li>
-                <li>Utilisation d'outils de suivi : tickets, Teams, Git et documentation partagée.</li>
-                <li>Gestion de blocages techniques par analyse, test et validation progressive.</li>
-                <li>Travail coordonné avec des profils techniques et métiers pour satisfaire les besoins clients.</li>
-            </ul>
-        </div>
-        <div class="timeline-item">
-            <h3><i class="fas fa-comment-dots"></i> Travail collaboratif</h3>
-            <span class="date">Compétences relationnelles</span>
-            <ul>
-                <li>Communication claire des difficultés et des solutions envisagées.</li>
-                <li>Écoute active et adaptation à des demandes changeantes.</li>
-                <li>Gestion de conflits techniques par des compromis constructifs.</li>
-                <li>Priorisation des tâches en fonction du planning de l'équipe.</li>
-            </ul>
-        </div>
-    </section>
+    
 
     <section id="passeport-culturel">
         <h2>Passeport culturel</h2>
@@ -2179,37 +2798,39 @@
         </div>
     </section>
 
-    <section id="objectifs">
-        <h2>Objectifs</h2>
-        <div class="timeline-item">
-            <h3><i class="fas fa-graduation-cap"></i> Poursuite d'études</h3>
-            <p>Je vais poursuivre ma formation en alternance dans une école d'ingénieur, afin d'approfondir mes compétences techniques et professionnelles tout en acquérant une expérience concrète en entreprise.</p>
-        </div>
-        <div class="timeline-item">
-            <h3><i class="fas fa-bullseye"></i> Court terme</h3>
-            <ul>
-                <li>Finaliser mon portfolio et le dossier professionnel complet pour le jury.</li>
-                <li>Renforcer mes compétences en développement web et sécurité des systèmes.</li>
-                <li>Obtenir mon BUT3 Informatique.</li>
-            </ul>
-        </div>
-        <div class="timeline-item">
-            <h3><i class="fas fa-road"></i> Moyen terme</h3>
-            <ul>
-                <li>Trouver une alternance ou un poste junior dans les domaines de la cybersécurité, de l'IA ou du développement logiciel.</li>
-                <li>Contribuer à des projets techniques structurants et polyvalents.</li>
-            </ul>
-        </div>
-        <div class="timeline-item">
-            <h3><i class="fas fa-star"></i> Long terme</h3>
-            <ul>
-                <li>Devenir chef de projet technique ou architecte sécurité.</li>
-                <li>Réussir à mener des projets qui allient innovation, performance et sécurité.</li>
-            </ul>
-        </div>
-    </section>
-
-
+   <section id="objectifs">
+    <h2>Objectifs & Poursuite d'études</h2>
+    <div class="timeline-item">
+        <h3><i class="fas fa-graduation-cap"></i> La suite, je sais où elle m'emmène</h3>
+        <span class="date">Septembre 2026</span>
+        <p>C'est officiel : j'intègre un cycle d'ingénieur à <strong style="color: var(--accent-cyan);">YVSQ – Paris-Saclay</strong> en alternance, dans le domaine Data / IA.</p>
+        <p style="margin-top: 1rem;">C'est une décision que j'ai mûrie cette année, pas juste cochée dans une case. Le travail de PPP, le stage chez Makseb, Miaam, la Nuit de l'Info... tout ça m'a confirmé que ce qui me plaît vraiment, c'est construire des systèmes qui exploitent les données intelligemment. Pas de la data pour faire joli sur un dashboard, mais de la data qui aide à décider.</p>
+        <p style="margin-top: 1rem;">Pourquoi l'alternance ? Parce que j'apprends mieux quand il y a un vrai enjeu derrière. Résoudre un problème réel en entreprise, puis revenir en cours comprendre pourquoi ça marche (ou pas). C'est ce rythme-là qui me correspond.</p>
+        <p style="margin-top: 1rem;">Pourquoi Paris-Saclay ? Parce que c'est un écosystème sérieux, exigeant, et que j'ai envie d'être dans un environnement qui pousse vers le haut.</p>
+    </div>
+    <div class="timeline-item">
+        <h3><i class="fas fa-bullseye"></i> D'ici là</h3>
+        <ul>
+            <li>Valider mon BUT3 et défendre ce portfolio au jury dans les meilleures conditions.</li>
+            <li>Finir de renforcer mes bases en MLOps et en déploiement de modèles. Des lacunes que j'ai identifiées et que je comble activement.</li>
+            <li>Trouver l'alternance qui me permettra d'apporter quelque chose dès le premier jour, pas juste d'observer.</li>
+        </ul>
+    </div>
+    <div class="timeline-item">
+        <h3><i class="fas fa-road"></i> Dans quelques années</h3>
+        <ul>
+            <li>Être un ingénieur qui comprend les données bout en bout : de la collecte brute jusqu'à la décision qu'elles permettent.</li>
+            <li>Contribuer à des projets où la technique sert quelque chose. Idéalement avec un impact environnemental ou social mesurable.</li>
+        </ul>
+    </div>
+    <div class="timeline-item">
+        <h3><i class="fas fa-star"></i> Ce qui ne change pas</h3>
+        <ul>
+            <li>Travailler sur des problèmes qui valent la peine d'être résolus.</li>
+            <li>L'idée derrière Miaam n'est pas morte. Un jour, peut-être.</li>
+        </ul>
+    </div>
+</section>
 
     <!-- =================================================================== -->
     <!-- MODALE DE VISUALISATION DES CERTIFICATIONS -->
@@ -2223,179 +2844,209 @@
         </div>
     </div>
 
-    <!-- =================================================================== -->
-    <!-- SECTION ENGAGEMENT & ACTIVITÉS ASSOCIATIVES -->
-    <!-- Clubs et organisations: Securinets, Enactus, AIESEC -->
-    <!-- =================================================================== -->
-    <section id="engagement">
-        <h2>Activités & Engagement</h2>
-        <div class="timeline-item">
-            <h3>
-                <img src="images/securinets-logo.png" alt="Securinets Logo" class="logo">
-                Securinets ISI - Membre Active
-            </h3>
-            <span class="date">2 ans</span>
-            <p>Participation à des compétitions CTF (Capture The Flag) en cybersécurité. Participation à deux éditions
-                du Securicom, congrès annuel de cybersécurité réunissant experts et professionnels.</p>
-            <button onclick="openCertModal('images/securinets.png')" class="btn btn-secondary" style="margin-top: 1rem;"><i class="fas fa-certificate"></i> Voir le certificat</button>
-        </div>
-        <div class="timeline-item">
-            <h3>
-                <img src="images/enactus-logo2.png" alt="Enactus Logo" class="logo">
-                Enactus ISI
-            </h3>
-            <p>Contribution à l'élaboration de projets d'entrepreneuriat social axés sur le développement durable et
-                l'impact sociétal positif.</p>
-            <button onclick="openCertModal('images/enactus-logo.png')" class="btn btn-secondary" style="margin-top: 1rem;"><i class="fas fa-certificate"></i> Voir l'attestation</button>
-        </div>
-        <div class="timeline-item">
-            <h3>
-                <img src="images/images.png" alt="LOGO IEEE" class="logo">
-                Institute of Electrical and Electronics Engineers
-            </h3>
-            <p>Bénévole IEEE (Computer Society) : Co-organisation de conférences d'experts, d'ateliers de code et de hackathons/compétitions.</p>
-            <button onclick="openCertModal('images/IEEE.png')" class="btn btn-secondary" style="margin-top: 1rem;"><i class="fas fa-certificate"></i> Voir le certificat</button>
-        </div>
-    </section>
 
-    <!-- =================================================================== -->
-    <!-- SECTION PASSIONS & LOISIRS -->
-    <!-- Pâtisserie, Lecture, Sorties en groupe -->
-    <!-- =================================================================== -->
+<!-- =================================================================== -->
+<!-- SECTION ENGAGEMENT & ACTIVITÉS ASSOCIATIVES                          -->
+<!-- =================================================================== -->
+<section id="engagement">
+    <h2>Activités & Engagement</h2>
+    <div class="timeline-item">
+        <h3>
+            <img src="images/securinets-logo.png" alt="Securinets Logo" class="logo">
+            Securinets ISI - Membre Active
+        </h3>
+        <span class="date">2 ans</span>
+        <p>Participation à des compétitions CTF (Capture The Flag) en cybersécurité. Participation à deux éditions du Securicom, congrès annuel de cybersécurité réunissant experts et professionnels.</p>
+        <button onclick="openCertModal('images/securinets.png')" class="btn btn-secondary" style="margin-top: 1rem;"><i class="fas fa-certificate"></i> Voir le certificat</button>
+    </div>
+    <div class="timeline-item">
+        <h3>
+            <img src="images/enactus-logo2.png" alt="Enactus Logo" class="logo">
+            Enactus ISI
+        </h3>
+        <p>Contribution à l'élaboration de projets d'entrepreneuriat social axés sur le développement durable et l'impact sociétal positif.</p>
+        <button onclick="openCertModal('images/enactus-logo.png')" class="btn btn-secondary" style="margin-top: 1rem;"><i class="fas fa-certificate"></i> Voir l'attestation</button>
+    </div>
+    <div class="timeline-item">
+        <h3>
+            <img src="images/images.png" alt="LOGO IEEE" class="logo">
+            Institute of Electrical and Electronics Engineers
+        </h3>
+        <p>Bénévole IEEE (Computer Society) : Co-organisation de conférences d'experts, d'ateliers de code et de hackathons/compétitions.</p>
+        <button onclick="openCertModal('images/IEEE.png')" class="btn btn-secondary" style="margin-top: 1rem;"><i class="fas fa-certificate"></i> Voir le certificat</button>
+    </div>
+</section>
+
+<!-- =================================================================== -->
+<!-- SECTION PASSIONS & LOISIRS                                           -->
+<!-- =================================================================== -->
 <section id="passions">
-        <h2>Passions & Loisirs</h2>
-        <div class="projects-grid">
-            
-            <div class="project-card fade-in">
-                <img src="images/salle.jpg" alt="Sport et Discipline" class="skill-image">
-                <h3><i class="fas fa-dumbbell"></i> Sport & Discipline</h3>
-                <p>Le sport fait partie intégrante de mon équilibre de vie. Entre le karaté, la musculation et la natation, ces disciplines m'apportent au quotidien la rigueur, la persévérance et le dépassement de soi.</p>
-            </div>
-
-            <div class="project-card fade-in">
-                <img src="images/lecture.jpg" alt="Lecture et Développement Personnel" class="skill-image">
-                <h3><i class="fas fa-book-open"></i> Lecture & Dév. Personnel</h3>
-                <p>Soucieux de mon amélioration continue, je consacre du temps à la lecture d'ouvrages de développement personnel. Ces livres m'aident à cultiver un état d'esprit positif, à optimiser mon organisation et à m'enrichir intellectuellement.</p>
-            </div>
-            
-            <div class="project-card fade-in">
-                <img src="images/wajdi6.jpeg" alt="Nature et Sorties en Groupe" class="skill-image">
-                <h3><i class="fas fa-tree"></i> Nature & Sorties en Groupe</h3>
-                <p>J'apprécie particulièrement m'évader en pleine nature pour déconnecter. Partager ces moments en plein air avec mes amis lors de balades ou de randonnées est essentiel pour me ressourcer et créer de beaux souvenirs communs.</p>
-            </div>
-
+    <h2>Passions & Loisirs</h2>
+    <div class="projects-grid">
+        <div class="project-card fade-in">
+            <img src="images/salle.jpg" alt="Sport et Discipline" class="skill-image">
+            <h3><i class="fas fa-dumbbell"></i> Sport & Discipline</h3>
+            <p>Le sport fait partie intégrante de mon équilibre de vie. Entre le karaté, la musculation et la natation, ces disciplines m'apportent au quotidien la rigueur, la persévérance et le dépassement de soi.</p>
         </div>
-    </section>
+        <div class="project-card fade-in">
+            <img src="images/lecture.jpg" alt="Lecture et Développement Personnel" class="skill-image">
+            <h3><i class="fas fa-book-open"></i> Lecture & Dév. Personnel</h3>
+            <p>Soucieux de mon amélioration continue, je consacre du temps à la lecture d'ouvrages de développement personnel. Ces livres m'aident à cultiver un état d'esprit positif, à optimiser mon organisation et à m'enrichir intellectuellement.</p>
+        </div>
+        <div class="project-card fade-in">
+            <img src="images/wajdi6.jpeg" alt="Nature et Sorties en Groupe" class="skill-image">
+            <h3><i class="fas fa-tree"></i> Nature & Sorties en Groupe</h3>
+            <p>J'apprécie particulièrement m'évader en pleine nature pour déconnecter. Partager ces moments en plein air avec mes amis lors de balades ou de randonnées est essentiel pour me ressourcer et créer de beaux souvenirs communs.</p>
+        </div>
+    </div>
+</section>
 
-    <!-- =================================================================== -->
-    <!-- SECTION LANGUES -->
-    <!-- Niveau dans différentes langues avec barres de progression -->
-    <!-- =================================================================== -->
-    <section id="langues">
-        <h2>Langues</h2>
-        <!-- Grille 2x2 de cartes de langues -->
-        <div class="langues-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; max-width: 800px; margin: 0 auto;">
-            <div class="skill-card fade-in">
-                <h3><i class="fas fa-language"></i> Arabe</h3>
-                <p>Langue maternelle</p>
-                <div style="width: 100%; background: rgba(139, 92, 246, 0.2); border-radius: 10px; height: 10px; margin-top: 1rem;">
-                    <div style="width: 100%; background: var(--primary-purple); height: 10px; border-radius: 10px;"></div>
-                </div>
-            </div>
-            <div class="skill-card fade-in">
-                <h3><i class="fas fa-language"></i> Français</h3>
-                <p>Courant</p>
-                <div style="width: 100%; background: rgba(139, 92, 246, 0.2); border-radius: 10px; height: 10px; margin-top: 1rem;">
-                    <div style="width: 95%; background: var(--primary-purple); height: 10px; border-radius: 10px;"></div>
-                </div>
-            </div>
-            <div class="skill-card fade-in">
-                <h3><i class="fas fa-language"></i> Anglais</h3>
-                <p>Avancé</p>
-                <div style="width: 100%; background: rgba(139, 92, 246, 0.2); border-radius: 10px; height: 10px; margin-top: 1rem;">
-                    <div style="width: 85%; background: var(--primary-purple); height: 10px; border-radius: 10px;"></div>
-                </div>
-            </div>
-            <div class="skill-card fade-in">
-                <h3><i class="fas fa-language"></i> Allemand</h3>
-                <p>Avancé</p>
-                <div style="width: 100%; background: rgba(139, 92, 246, 0.2); border-radius: 10px; height: 10px; margin-top: 1rem;">
-                    <div style="width: 80%; background: var(--primary-purple); height: 10px; border-radius: 10px;"></div>
-                </div>
+<!-- =================================================================== -->
+<!-- SECTION LANGUES                                                       -->
+<!-- =================================================================== -->
+<section id="langues">
+    <h2>Langues</h2>
+    <div class="langues-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; max-width: 800px; margin: 0 auto;">
+        <div class="skill-card fade-in">
+            <h3><i class="fas fa-language"></i> Arabe</h3>
+            <p>Langue maternelle</p>
+            <div style="width: 100%; background: rgba(139, 92, 246, 0.2); border-radius: 10px; height: 10px; margin-top: 1rem;">
+                <div style="width: 100%; background: var(--primary-purple); height: 10px; border-radius: 10px;"></div>
             </div>
         </div>
-    </section>
-
-    <!-- =================================================================== -->
-    <!-- SECTION CERTIFICATIONS -->
-    <!-- Certifications obtenues en cybersécurité (Fortinet, etc.) -->
-    <!-- =================================================================== -->
-    <section id="certifications">
-        <h2>Certifications</h2>
-        <!-- Liste de badges de certifications cliquables -->
-        <div class="certifications">
-            <div class="cert-badge" onclick="openCertModal('images/azure.png')"><i class="fas fa-certificate"></i> Microsoft Azure Fundamentals
+        <div class="skill-card fade-in">
+            <h3><i class="fas fa-language"></i> Français</h3>
+            <p>Courant</p>
+            <div style="width: 100%; background: rgba(139, 92, 246, 0.2); border-radius: 10px; height: 10px; margin-top: 1rem;">
+                <div style="width: 95%; background: var(--primary-purple); height: 10px; border-radius: 10px;"></div>
             </div>
-            <div class="cert-badge" onclick="openCertModal('images/ml.png')"><i class="fas fa-shield-halved"></i>IBM Explanatory Data Analytsis For Machine Learning</div>
-            <div class="cert-badge" onclick="openCertModal('images/linux.png')"><i class="fas fa-user-shield"></i> Cisco Linux Unhatched</div>
         </div>
-    </section>
+        <div class="skill-card fade-in">
+            <h3><i class="fas fa-language"></i> Anglais</h3>
+            <p>Avancé</p>
+            <div style="width: 100%; background: rgba(139, 92, 246, 0.2); border-radius: 10px; height: 10px; margin-top: 1rem;">
+                <div style="width: 85%; background: var(--primary-purple); height: 10px; border-radius: 10px;"></div>
+            </div>
+        </div>
+        <div class="skill-card fade-in">
+            <h3><i class="fas fa-language"></i> Allemand</h3>
+            <p>Intermédiaire</p>
+            <div style="width: 100%; background: rgba(139, 92, 246, 0.2); border-radius: 10px; height: 10px; margin-top: 1rem;">
+                <div style="width: 60%; background: var(--primary-purple); height: 10px; border-radius: 10px;"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- =================================================================== -->
+<!-- SECTION CERTIFICATIONS                                                -->
+<!-- =================================================================== -->
+<section id="certifications">
+    <h2>Certifications</h2>
+    <div class="certifications">
+        <div class="cert-badge" onclick="openCertModal('images/azure.png')"><i class="fas fa-certificate"></i> Microsoft Azure Fundamentals</div>
+        <div class="cert-badge" onclick="openCertModal('images/ml.png')"><i class="fas fa-shield-halved"></i> IBM Exploratory Data Analysis For Machine Learning</div>
+        <div class="cert-badge" onclick="openCertModal('images/linux.png')"><i class="fas fa-user-shield"></i> Cisco Linux Unhatched</div>
+    </div>
+</section>
 
     <!-- =================================================================== -->
-    <!-- SECTION CONTACT -->
-    <!-- Informations de contact et formulaire de message -->
+    <!-- SECTION TÉMOIGNAGES & CONTACT -->
     <!-- =================================================================== -->
-    <section id="contact">
-        <h2>Contact</h2>
-        <div class="contact-container">
-            <!-- Colonne gauche: Informations de contact -->
-            <div class="contact-info">
-                <div class="contact-item">
-                    <i class="fas fa-envelope"></i> Email: <a href="mailto:wajdibenouirane@gmail.com">wajdibenouirane@gmail.com</a>
-                </div>
-                <div class="contact-item">
-                    <i class="fab fa-linkedin"></i> LinkedIn: <a href="https://www.linkedin.com/in/wajdi-ben-ouirane/"
-                        target="_blank">Wajdi Ben Ouirane</a>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-location-dot"></i> Localisation: Paris, Île-de-France
-                </div>
+    <section id="temoignages-contact">
+        <div id="temoignages">
+            <h2>Témoignages</h2>
+            <div style="background: #1a1a1a; border-radius: 16px; border: 1px solid rgba(139, 92, 246, 0.2); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2); overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; table-layout: fixed;">
+                    <thead style="background-color: rgba(139, 92, 246, 0.08);">
+                        <tr style="border-bottom: 1px solid rgba(139, 92, 246, 0.2);">
+                            <th style="padding: 1.5rem; text-align: left; color: var(--light-purple); font-size: 1.1rem; font-weight: 600; border-right: 1px solid rgba(139, 92, 246, 0.2);">
+                                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                    <i class="fas fa-user-tie"></i>
+                                    <div>
+                                        Madame Baroukh
+                                        <span style="display: block; font-size: 0.9rem; color: var(--accent-cyan); font-weight: 500;">Professeure de Mathématiques</span>
+                                    </div>
+                                </div>
+                            </th>
+                            <th style="padding: 1.5rem; text-align: left; color: var(--light-purple); font-size: 1.1rem; font-weight: 600;">
+                                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                    <i class="fas fa-user-tie"></i>
+                                    <div>
+                                        Monsieur Loisel
+                                        <span style="display: block; font-size: 0.9rem; color: var(--accent-cyan); font-weight: 500;">Professeur d'Anglais</span>
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 1.5rem; vertical-align: top; border-right: 1px solid rgba(139, 92, 246, 0.2);">
+                                <p style="font-style: italic; color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.7;">"Wajdi a toujours fait preuve d'une grande rigueur et d'une capacité d'analyse exceptionnelle. Sa curiosité pour les sujets complexes et sa persévérance lui ont permis d'exceller en mathématiques et de développer une pensée logique impressionnante."</p>
+                                <a href="resume/recommendation-baroukh.pdf" download class="btn btn-secondary" style="width: 100%;"><i class="fas fa-file-pdf"></i> Voir la recommandation</a>
+                            </td>
+                            <td style="padding: 1.5rem; vertical-align: top;">
+                                <p style="font-style: italic; color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.7;">"Wajdi est un élève très engagé, doté d'une excellente maîtrise de l'anglais. Sa participation active en classe et sa capacité à communiquer des idées complexes avec clarté sont remarquables. Il possède un véritable talent pour l'apprentissage des langues."</p>
+                                <a href="resume/recommendation-loisel.pdf" download class="btn btn-secondary" style="width: 100%;"><i class="fas fa-file-pdf"></i> Voir la recommandation</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <div class="contact-form">
-                <h3><i class="fas fa-paper-plane"></i> Envoyez-moi un message</h3>
-                <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
-                    <input type="hidden" name="access_key" value="781f33fc-e8d8-4889-bc7a-5fe9a01136b3">
-                    <input type="hidden" name="subject" value="Nouveau message depuis votre portfolio">
-                    <input type="hidden" name="from_name" value="Portfolio Wajdi Ben Ouirane">
-                    
-                    <div class="form-group">
-                        <label for="name">Nom complet *</label>
-                        <input type="text" id="name" name="name" required>
+        </div>
+
+        <div id="contact" style="padding-top: 5rem;">
+            <h2>Contact</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i> Email: <a href="mailto:wajdibenouirane@gmail.com">wajdibenouirane@gmail.com</a>
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="email">Email *</label>
-                        <input type="email" id="email" name="email" required>
+                    <div class="contact-item">
+                        <i class="fab fa-linkedin"></i> LinkedIn: <a href="https://www.linkedin.com/in/wajdi-ben-ouirane/"
+                            target="_blank">Wajdi Ben Ouirane</a>
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="message">Message *</label>
-                        <textarea id="message" name="message" required></textarea>
+                    <div class="contact-item">
+                        <i class="fas fa-location-dot"></i> Localisation: Paris, Île-de-France
                     </div>
-                    
-                    <div class="form-checkbox">
-                        <input type="checkbox" id="rgpd" name="rgpd" required>
-                        <label for="rgpd">
-                            J'accepte que mes données personnelles soient collectées et traitées dans le cadre de cette demande de contact, conformément au <a href="rgpd.html" target="_blank"><strong>Règlement Général sur la Protection des Données (RGPD)</strong></a>. Ces informations ne seront utilisées que pour répondre à votre message et ne seront pas partagées avec des tiers. *
-                        </label>
-                    </div>
-                    
-                    <button type="submit" class="form-submit">
-                        <i class="fas fa-paper-plane"></i> Envoyer le message
-                    </button>
-                    
-                    <div id="formMessage" class="form-message"></div>
-                </form>
+                </div>
+                <div class="contact-form">
+                    <h3><i class="fas fa-paper-plane"></i> Envoyez-moi un message</h3>
+                    <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+                        <input type="hidden" name="access_key" value="781f33fc-e8d8-4889-bc7a-5fe9a01136b3">
+                        <input type="hidden" name="subject" value="Nouveau message depuis votre portfolio">
+                        <input type="hidden" name="from_name" value="Portfolio Wajdi Ben Ouirane">
+                        
+                        <div class="form-group">
+                            <label for="name">Nom complet *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        
+                        <div class="form-checkbox">
+                            <input type="checkbox" id="rgpd" name="rgpd" required>
+                            <label for="rgpd">
+                                J'accepte que mes données personnelles soient collectées et traitées dans le cadre de cette demande de contact, conformément au <a href="rgpd.html" target="_blank"><strong>Règlement Général sur la Protection des Données (RGPD)</strong></a>. Ces informations ne seront utilisées que pour répondre à votre message et ne seront pas partagées avec des tiers. *
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="form-submit">
+                            <i class="fas fa-paper-plane"></i> Envoyer le message
+                        </button>
+                        
+                        <div id="formMessage" class="form-message"></div>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
@@ -2405,7 +3056,7 @@
     <!-- Pied de page avec copyright et informations -->
     <!-- =================================================================== -->
     <footer>
-        <p>© 2024 Wajdi Ben Ouirane - Étudiant en BUT3 informatique @USPN</p>
+        <p>© 2026 Wajdi Ben Ouirane - Étudiant en BUT3 informatique @USPN</p>
         <p><i class="fas fa-globe"></i> Langues: Français (courant), Arabe (langue maternelle), Anglais (avancé), Allemand
             (avancé)</p>
     </footer>

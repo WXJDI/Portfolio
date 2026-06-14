@@ -311,7 +311,7 @@
         <div class="rgpd-section">
             <h2>9. Modifications de cette politique</h2>
             <p>Cette politique peut être modifiée à tout moment. Les modifications seront communiquées via cette page.</p>
-            <p><strong>Dernière mise à jour :</strong> Avril 2026</p>
+            <p><strong>Dernière mise à jour :</strong> Mai 2024</p>
         </div>
 
         <div class="rgpd-section">
@@ -327,8 +327,16 @@
     </main>
 
     <footer>
-        <p>© 2026 Wajdi Ben Ouirane - Étudiant en BUT3 Informatique | Politique RGPD</p>
+        <p>&copy; <span id="currentYear"></span> Wajdi Ben Ouirane - Étudiant en BUT3 Informatique | Politique RGPD</p>
     </footer>
+
+    <script>
+        /* =====================================================================
+         * MISE À JOUR DE L'ANNÉE DANS LE FOOTER
+         * Affiche l'année en cours dynamiquement
+         * ===================================================================== */
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
 </body>
 
 </html>
