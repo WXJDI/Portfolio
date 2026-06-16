@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -1402,13 +1403,14 @@
             display: none;
             position: fixed;
             z-index: 10000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            padding: 5rem 1.25rem 1.25rem;
+            background-color: rgba(0, 0, 0, 0.92);
             backdrop-filter: blur(10px);
             animation: fadeIn 0.3s ease;
+            overflow: auto;
         }
 
         .cert-modal.active {
@@ -1419,15 +1421,22 @@
 
         .cert-modal-content {
             position: relative;
-            max-width: 70%;
-            max-height: 85vh;
+            width: fit-content;
+            max-width: 92vw;
+            max-height: calc(100vh - 6.5rem);
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             animation: zoomIn 0.3s ease;
         }
 
         .cert-modal-content img {
-            width: 100%;
+            display: block;
+            width: auto;
             height: auto;
-            max-height: 85vh;
+            max-width: 92vw;
+            max-height: calc(100vh - 6.5rem);
             object-fit: contain;
             border-radius: 12px;
             box-shadow: 0 0 50px rgba(139, 92, 246, 0.5);
@@ -1435,11 +1444,12 @@
 
         .cert-modal-close {
             position: absolute;
-            top: -40px;
+            top: -3rem;
             right: 0;
             color: white;
             font-size: 40px;
             font-weight: bold;
+            line-height: 1;
             cursor: pointer;
             transition: all 0.3s;
         }
@@ -1637,7 +1647,6 @@
             cursor: pointer;
             user-select: none;
         }
-        }
 
         .form-checkbox label a {
             color: var(--primary-purple);
@@ -1794,7 +1803,7 @@
                 overflow-x: hidden;
             }
 
-            .stage-table-container {
+            .stage-table-container,
             .stage-summary-container {
                 padding: 1.5rem;
             }
@@ -2156,6 +2165,29 @@
             .testimonial-card {
                 padding: 1.5rem;
             }
+        }
+    
+        /* Correctif final : évite que les images portrait soient décalées dans la modale */
+        .cert-modal.active {
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+        }
+
+        .cert-modal-content {
+            width: fit-content !important;
+            max-width: 92vw !important;
+            max-height: calc(100vh - 6.5rem) !important;
+            margin: auto !important;
+        }
+
+        .cert-modal-content img {
+            display: block !important;
+            width: auto !important;
+            height: auto !important;
+            max-width: 92vw !important;
+            max-height: calc(100vh - 6.5rem) !important;
+            object-fit: contain !important;
         }
     </style>
 </head>
