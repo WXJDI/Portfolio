@@ -1833,9 +1833,21 @@
             }
 
             .cert-modal-content {
-                max-width: 95%;
-                max-height: 85%;
-            }
+            position: relative;
+            /* LA CLÉ EST ICI : inline-block force la boîte à "mouler" exactement la taille de l'image */
+            display: inline-block; 
+            animation: zoomIn 0.3s ease;
+        }
+
+        .cert-modal-content img {
+            max-width: 90vw;   /* L'image ne dépassera pas 90% de la largeur de l'écran */
+            max-height: 85vh;  /* L'image ne dépassera pas 85% de la hauteur de l'écran */
+            width: auto;       /* Laisse la largeur s'adapter naturellement */
+            height: auto;      /* Laisse la hauteur s'adapter naturellement */
+            display: block;
+            border-radius: 12px;
+            box-shadow: 0 0 50px rgba(139, 92, 246, 0.5);
+        }
 
             .cert-modal-close {
                 top: -35px;
@@ -2836,7 +2848,7 @@
             <p>Le sport fait partie intégrante de mon équilibre de vie. Entre le karaté, la musculation et la natation, ces disciplines m'apportent au quotidien la rigueur, la persévérance et le dépassement de soi.</p>
         </div>
         <div class="project-card fade-in">
-            <img src="images/lecture.jpg" alt="Lecture et Développement Personnel" class="skill-image">
+            <img src="images/books.jpg" alt="Lecture et Développement Personnel" class="skill-image">
             <h3><i class="fas fa-book-open"></i> Lecture & Dév. Personnel</h3>
             <p>Soucieux de mon amélioration continue, je consacre du temps à la lecture d'ouvrages de développement personnel. Ces livres m'aident à cultiver un état d'esprit positif, à optimiser mon organisation et à m'enrichir intellectuellement.</p>
         </div>
